@@ -5,17 +5,17 @@ class Producto {
     String nombre
     String descripcion
     String sku
-    int calb
+    int calibre
     int size
-    int unbx
+    int unindadesCaja
     String tipo
-    String brnd
-    String labl
-    String orga
-    String fatr
+    String marca
+    String etiqueta
+    String organico
+    String fairTrade
     int peso
-    String pack
-    String cjpl
+    String empaque
+    String cajasPalet
 
     static auditable = true
 
@@ -30,33 +30,34 @@ class Producto {
             nombre column: 'prodnmbr'
             descripcion column: 'proddscr'
             sku column: 'prod_sku'
-            calb column: 'prodcalb'
+            calibre column: 'prodcalb'
             size column: 'prodsize'
-            unbx column: 'produnbx'
-            brnd column: 'prodbrnd'
-            labl column: 'prodlabl'
-            orga column: 'prodorga'
-            fatr column: 'prodfatr'
+            unindadesCaja column: 'produnbx'
+            tipo column: 'prodtipo'
+            marca column: 'prodbrnd'
+            etiqueta column: 'prodlabl'
+            organico column: 'prodorga'
+            fairTrade column: 'prodfatr'
             peso column: 'prodpeso'
-            pack column: 'prodpack'
-            cjpl column: 'prodcjpl'
+            empaque column: 'prodpack'
+            cajasPalet column: 'prodcjpl'
         }
     }
     static constraints = {
         nombre(size: 3..65, blank: false, nullable: false)
         descripcion(size: 0..255, blank: true, nullable: true)
         sku(size: 0..31, blank: true, nullable: true)
-        calb(blank: true, nullable: true)
+        calibre(blank: true, nullable: true)
         size(blank: true, nullable: true)
-        unbx(blank: true, nullable: true)
+        unindadesCaja(blank: true, nullable: true)
         tipo(size: 0..1, blank: true, nullable: true)
-        brnd(size: 0..31, blank: true, nullable: true)
-        labl(size: 0..31, blank: true, nullable: true)
-        orga(size: 0..1, blank: true, nullable: true)
-        fatr(size: 0..1, blank: true, nullable: true)
+        marca(size: 0..31, blank: true, nullable: true)
+        etiqueta(size: 0..31, blank: true, nullable: true)
+        organico(size: 0..1, blank: true, nullable: true)
+        fairTrade(size: 0..1, blank: true, nullable: true)
         peso(blank: true, nullable: true)
-        pack(size: 0..31, blank: true, nullable: true)
-        cjpl(blank: true, nullable: true)
+        empaque(size: 0..31, blank: true, nullable: true)
+        unindadesCaja(blank: true, nullable: true)
     }
 
 }
