@@ -168,11 +168,11 @@
         <div class="col-lg-6 mbr-col-md-10">
             <div class="wrap">
                 <div style="width: 200px; height: 140px">
-                    <asset:image src="apli/educacion.png" title="Datos de pacientes"  width="80%" height="80%"/>
+                    <asset:image src="apli/fruta.png" title="Datos de pacientes"  width="80%" height="80%"/>
                 </div>
                 <div style="width: 450px; height: 220px">
-                    <h2 class="mbr-fonts-style mbr-bold mbr-section-title3 display-5"><span>Períodos</span></h2>
-                    <p class="mbr-fonts-style text1 mbr-text display-6">Períodos académicos</p>
+                    <h2 class="mbr-fonts-style mbr-bold mbr-section-title3 display-5"><span>Órdenes de Compra</span></h2>
+                    <p class="mbr-fonts-style text1 mbr-text display-6">Elaboración de la órden de compra semanal</p>
                 </div>
             </div>
         </div>
