@@ -17,13 +17,12 @@ class Persona implements Auditable{
     int activo
     Date fecha
     String telefono
-    String sigla
-    String autorizacion
     String sexo
-    String discapacidad
     String direccion
     String referencia
-//    String representante = 'N'
+    String sigla
+    String discapacidad
+    String autorizacion
 
     static auditable = true
 
@@ -39,7 +38,6 @@ class Persona implements Auditable{
 
         columns {
             id column: 'prsn__id'
-            unidadEjecutora column: 'unej__id'
             cedula column: 'prsncdla'
             nombre column: 'prsnnmbr'
             apellido column: 'prsnapll'
@@ -59,7 +57,6 @@ class Persona implements Auditable{
             discapacidad column: 'prsndscp'
             direccion column: 'prsndire'
             referencia column: 'prsnrefe'
-//            representante column: 'prsnrplg'
         }
     }
     static constraints = {
@@ -82,7 +79,6 @@ class Persona implements Auditable{
         discapacidad(size: 0..15, blank: true, nullable: true)
         direccion(size: 0..255, blank: true, nullable: true)
         referencia(size: 0..255, blank: true, nullable: true)
-//        representante(blank: true, nullable: true)
     }
 
     String toString() {
@@ -93,20 +89,7 @@ class Persona implements Auditable{
         if (this.activo != 1) {
             return false
         }
-/*
-        def now = new Date()
-        println "---> ${this.activo}"
-        def accs = Accs.findAllByUsuarioAndAccsFechaFinalGreaterThanEquals(this, now)
-        println "accs "+accs?.accsFechaInicial+"  "+accs?.accsFechaFinal
-        def res = true
-        accs.each {
-            if (res) {
-                if (it.accsFechaInicial <= now) {
-                    res = false
-                }
-            }
-        }
-*/
+
         return true
     }
 
