@@ -383,7 +383,7 @@ class PrflController {
     def save_ajax() {
         params.each { k, v ->
             if (v != "date.struct" && v instanceof java.lang.String) {
-                params[k] = v.toUpperCase()
+                //params[k] = v.toUpperCase()
             }
         }
         def prflInstance = new Prfl()
@@ -460,6 +460,7 @@ class PrflController {
     }
 
     def save = {
+        println "save: --> ${params}"
         def title
         if (params.id) {
             title = g.message(code: "prfl.edit", default: "Edit Prfl")
@@ -490,30 +491,6 @@ class PrflController {
         }
     }
 
-//    def update = {
-//        def prflInstance = Prfl.get(params.id)
-//        if (prflInstance) {
-//            if (params.version) {
-//                def version = params.version.toLong()
-//                if (prflInstance.version > version) {
-//
-//                    prflInstance.errors.rejectValue("version", "default.optimistic.locking.failure", [message(code: 'prfl.label', default: 'Prfl')] as Object[], "Another user has updated this Prfl while you were editing")
-//                    render(view: "edit_old", model: [prflInstance: prflInstance])
-//                    return
-//                }
-//            }
-//            prflInstance.properties = params
-//            if (!prflInstance.hasErrors() && prflInstance.save(flush: true)) {
-//                flash.message = "${message(code: 'default.updated.message', args: [message(code: 'prfl.label', default: 'Prfl'), prflInstance.id])}"
-//                redirect(action: "show", id: prflInstance.id)
-//            } else {
-//                render(view: "edit_old", model: [prflInstance: prflInstance])
-//            }
-//        } else {
-//            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'prfl.label', default: 'Prfl'), params.id])}"
-//            redirect(action: "list")
-//        }
-//    }
 
     def show = {
         def prflInstance = Prfl.get(params.id)
