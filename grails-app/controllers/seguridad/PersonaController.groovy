@@ -1174,10 +1174,11 @@ class PersonaController {
 
     def guardarPerfiles_ajax () {
 //        println("params prfl " + params)
-
+        def errores = ''
         def personaInstance = Persona.get(params.id)
         def perfilActual = Prfl.get(session.perfil.id)
-        def sesionActual = Sesn.findByPerfilAndUsuarioAndFechaFinIsNull(perfilActual, personaInstance)
+//        def sesionActual = Sesn.findByPerfilAndUsuarioAndFechaFinIsNull(perfilActual, personaInstance)
+        def sesionActual = session
         def perfilesOld = Sesn.findAllByUsuarioAndFechaFinIsNull(personaInstance)
 
 //        println("old " + perfilesOld)
@@ -1204,7 +1205,7 @@ class PersonaController {
             def perfilesDelete = perfilesOld.perfil.plus(perfilesSelected)
             perfilesDelete.removeAll(commons)
 
-            def errores = ''
+
 
 //            println("p i " + perfilesInsertar)
 //            println("p b " + perfilesDelete)
@@ -1260,14 +1261,14 @@ class PersonaController {
                 render "no"
             }
         }else{
-            if(sesionActual.usuario == personaInstance){
-                render "er_No puede borrar el perfil ${sesionActual}, está actualmente en uso"
+            if(sesionActual.usuario?.id == personaInstance?.id){
+                render "er_No puede borrar el perfil ${sesionActual?.perfil?.nombre}, está actualmente en uso"
             }else{
 
                 def perfilesBorrar = Sesn.findAllByUsuario(personaInstance)
 
                 perfilesBorrar.each { perfil ->
-                    def perfilB = Sesn.findByPerfilAndUsuarioAndFechaFinIsNull(perfil, personaInstance)
+                    def perfilB = Sesn.findByPerfilAndUsuarioAndFechaFinIsNull(perfil?.perfil, personaInstance)
 
                     if(perfilB){
                         perfilB.fechaFin = new Date()
@@ -1296,6 +1297,14 @@ class PersonaController {
         def persona
         def texto = ''
 
+        if(params.fechaInicio){
+            params.fechaInicio = new Date().parse("dd-MM-yyyy", params.fechaInicio)
+        }
+
+        if(params.fechaFin){
+            params.fechaFin = new Date().parse("dd-MM-yyyy", params.fechaFin)
+        }
+
         if(params.id){
             persona = Persona.get(params.id)
             if(params.password != persona.password){
@@ -1303,7 +1312,6 @@ class PersonaController {
                 params.fecha = new Date()
             }
             params.autorizacion = params.autorizacion.encodeAsMD5()
-            params.unidadEjecutora = persona.unidadEjecutora
             texto = "Usuario actualizado correctamente"
         }else{
             persona = new Persona()
@@ -1314,16 +1322,11 @@ class PersonaController {
             texto = "Usuario creado correctamente"
         }
 
-        if(params.activo == '0'){
-            params.fechaFin = new Date()
-        }else{
-            params.fechaFin = null
-        }
         persona.properties = params
 
         if(!persona.save(flush:true)){
             println("error al guardar el usuario " + persona.errors)
-            render "no_" + texto
+            render "no_Error al guardar el usuario"
         }else{
             render "ok_" + texto
         }
@@ -1398,5 +1401,17 @@ class PersonaController {
         }else{
             render "ok"
         }
+    }
+
+    def tablaPersonas_ajax(){
+        def personas
+
+        if(params.nombre || params.apellido){
+            personas = Persona.findAllByNombreIlikeAndApellidoIlike("%" + params.nombre + "%", "%" +  params.apellido + "%")
+        }else{
+            personas = Persona.list([sort: 'apellido'])
+        }
+
+        return[personas: personas]
     }
 }

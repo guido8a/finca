@@ -24,7 +24,7 @@ option[selected]{
                         </label>
 
                         <div class="col-md-8">
-                            <g:textField name="nombre" maxlength="40" required="" class="form-control input-sm required" value="${personaInstance?.nombre}"/>
+                            <g:textField name="nombre" maxlength="40" minlength="3" required="" class="form-control input-sm required" value="${personaInstance?.nombre}"/>
                         </div>
                     </span>
                 </div>
@@ -36,7 +36,7 @@ option[selected]{
                         </label>
 
                         <div class="col-md-8">
-                            <g:textField name="apellido" maxlength="40" required="" class="form-control input-sm required" value="${personaInstance?.apellido}"/>
+                            <g:textField name="apellido" maxlength="40" minlength="3" required="" class="form-control input-sm required" value="${personaInstance?.apellido}"/>
                         </div>
                     </span>
                 </div>
@@ -48,8 +48,8 @@ option[selected]{
                             Cédula
                         </label>
 
-                        <div class="col-md-6">
-                            <g:textField name="cedula" maxlength="10" class="form-control input-sm required digits" value="${personaInstance?.cedula}"/>
+                        <div class="col-md-8">
+                            <g:textField name="cedula" maxlength="10" minlength="10" class="form-control input-sm required digits" value="${personaInstance?.cedula}"/>
                         </div>
                     </span>
                 </div>
@@ -180,7 +180,6 @@ option[selected]{
 
             <div class="form-group keeptogether ${hasErrors(bean: personaInstance, field: 'login', 'error')} ${hasErrors(bean: personaInstance, field: 'password', 'error')}">
                 <g:hiddenField name="id" value="${personaInstance?.id}"/>
-                <g:hiddenField name="unidadEjecutora" value="${unidad?.id}"/>
 
                 <div class="col-md-6">
                     <span class="grupo">
@@ -191,7 +190,7 @@ option[selected]{
                             <div class="input-group input-group-sm">
                                 <span class="input-group-addon"><i class="fa fa-user"></i>
                                 </span>
-                                <g:field type="login" name="login" maxlength="15" style="" class="form-control input-sm noEspacios required" value="${personaInstance?.login ?: ''}"/>
+                                <g:field type="login" name="login" maxlength="15" minlength="4" style="" class="form-control input-sm noEspacios required" value="${personaInstance?.login ?: ''}"/>
                             </div>
                         </div>
                     </span>
@@ -219,8 +218,6 @@ option[selected]{
                         </label>
 
                         <div class="col-md-6">
-%{--                            <g:textField name="autorizacion" maxlength="63" class="form-control input-sm" value="${personaInstance?.autorizacion}"/>--}%
-
                             <div class="input-group input-group-sm"><span class="input-group-addon"><i class="fa fa-key"></i>
                             </span><g:field type="password" name="autorizacion"  maxlength="63" class="form-control input-sm noEspacios required" value="${personaInstance?.autorizacion ?: ''}"/>
                             </div>
@@ -229,10 +226,45 @@ option[selected]{
                 </div>
             </div>
 
+
+            <div class="form-group keeptogether ${hasErrors(bean: personaInstance, field: 'fechaInicio', 'error')} ${hasErrors(bean: personaInstance, field: 'fechaFin', 'error')}">
+                <div class="col-md-6">
+                    <span class="grupo">
+                        <label for="fechaInicio" class="col-md-4 control-label">
+                            Fecha Inicio
+                        </label>
+                        <div class="col-md-8">
+                            <div class="input-group input-group-sm">
+                                <input aria-label="" name="fechaInicio" id='fechaInicio' type='text' class="form-control" value="${personaInstance?.fechaInicio?.format("dd-MM-yyyy")}" />
+                            </div>
+                        </div>
+                    </span>
+                </div>
+                <div class="col-md-6">
+                    <span class="grupo">
+                        <label for="password" class="col-md-4 control-label">
+                            Fecha Fin
+                        </label>
+                        <div class="col-md-8">
+                            <input aria-label="" name="fechaFin" id='fechaFin' type='text' class="form-control" value="${personaInstance?.fechaFin?.format("dd-MM-yyyy")}" />
+                        </div>
+                    </span>
+                </div>
+            </div>
         </g:form>
     </div>
 
     <script type="text/javascript">
+
+        $('#fechaInicio, #fechaFin').datetimepicker({
+            locale: 'es',
+            format: 'DD-MM-YYYY',
+            sideBySide: true,
+            showClose: true,
+            icons: {
+            }
+        });
+
         var validator = $("#frmPersona").validate({
             errorClass    : "help-block",
             errorPlacement: function (error, element) {
@@ -278,60 +310,12 @@ option[selected]{
         });
 
         $(".form-control").keydown(function (ev) {
-            if (ev.keyCode == 13) {
+            if (ev.keyCode === 13) {
                 submitFormPersona();
                 return false;
             }
             return true;
         });
-
-        // $("#btn-addPerfil").click(function () {
-        //     var $perfil = $("#perfil");
-        //     var idPerfilAdd = $perfil.val();
-        //     $(".perfiles").each(function () {
-        //         if ($(this).data("id") == idPerfilAdd) {
-        //             $(this).remove();
-        //         }
-        //     });
-        //     var $tabla = $("#tblPerfiles");
-        //
-        //     var $tr = $("<tr>");
-        //     $tr.addClass("perfiles");
-        //     $tr.data("id", idPerfilAdd);
-        //     var $tdNombre = $("<td>");
-        //     $tdNombre.text($perfil.find("option:selected").text());
-        //     var $tdBtn = $("<td>");
-        //     $tdBtn.attr("width", "35");
-        //     var $btnDelete = $("<a>");
-        //     $btnDelete.addClass("btn btn-danger btn-xs");
-        //     $btnDelete.html("<i class='fa fa-trash-o'></i> ");
-        //     $tdBtn.append($btnDelete);
-        //
-        //     $btnDelete.click(function () {
-        //         $tr.remove();
-        //         return false;
-        //     });
-        //
-        //     $tr.append($tdNombre).append($tdBtn);
-        //
-        //     $tabla.prepend($tr);
-        //     $tr.effect("highlight");
-        //
-        //     return false;
-        // });
-        //
-        // $(".btn-deletePerfil").click(function () {
-        //     $(this).parents("tr").remove();
-        //     return false;
-        // });
-
-        $("input[maxlength]").maxlength( {
-            alwaysShow: true,
-            threshold: 10,
-            warningClass: "label label-success",
-            limitReachedClass: "label label-danger"
-        });
-        $("textarea[maxlength]").maxlength();
 
     </script>
 
