@@ -157,7 +157,7 @@
     <g:set var="inst" value="${utilitarios.Parametros.get(1)}"/>
 
     <div style="text-align: center;margin-bottom: 50px"><h2 class="titl">
-        <p class="text-warning">Sistema de Apoyo al Programa de Envío Semanal</p>
+        <p class="text-warning">Programa de Envío Semanal</p>
     </h2>
     </div>
 
