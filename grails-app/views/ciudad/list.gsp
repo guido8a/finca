@@ -1,24 +1,23 @@
 <!DOCTYPE html>
 <html>
 <head>
-    %{--<meta name="layout" content="login">--}%
     <meta name="layout" content="main">
     <title>Ciudades</title>
 
-    <style type="text/css">
-    input:invalid {
-        border: 2px dashed red; !important;
-    }
+    %{--<style type="text/css">--}%
+    %{--input:invalid {--}%
+        %{--border: 2px dashed red; !important;--}%
+    %{--}--}%
 
-    input:invalid:required {
-        background-image: linear-gradient(to right, pink, lightgreen);
-    }
+    %{--input:invalid:required {--}%
+        %{--background-image: linear-gradient(to right, pink, lightgreen);--}%
+    %{--}--}%
 
-    input:valid {
-        border: 2px solid black;
-    }
-    </style>
-    
+    %{--input:valid {--}%
+        %{--border: 2px solid black;--}%
+    %{--}--}%
+    %{--</style>--}%
+    %{----}%
 
 </head>
 
@@ -46,10 +45,10 @@
 <table class="table table-condensed table-bordered table-striped table-hover">
     <thead>
     <tr>
-        <th>Numero</th>
-        <th>Nombre</th>
-        <th>País</th>
-        <th>Acciones</th>
+        <th width="10%">Numero</th>
+        <th width="40%">Nombre</th>
+        <th width="30%">País</th>
+        <th width="20%">Acciones</th>
     </tr>
     </thead>
     <tbody>
@@ -159,6 +158,7 @@
                 var b = bootbox.dialog({
                     title: title + " Ciudad" ,
                     closeButton: false,
+                    class: "modal-md",
                     message: msg,
                 }); //dialog
                 setTimeout(function () {
