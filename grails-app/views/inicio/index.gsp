@@ -157,7 +157,6 @@
     <g:set var="inst" value="${utilitarios.Parametros.get(1)}"/>
 
     <div style="text-align: center;margin-bottom: 50px"><h2 class="titl">
-        %{--            <p class="text-warning">${inst.institucion}</p>--}%
         <p class="text-warning">Sistema de Apoyo al Programa de Envío Semanal</p>
     </h2>
     </div>
@@ -182,12 +181,12 @@
         <div class="col-lg-6 mbr-col-md-10">
             <div class="wrap">
                 <div style="width: 200px; height: 140px">
-                    <asset:image src="apli/educacion.png" title="Medicinas"  width="80%" height="80%"/>
+                    <asset:image src="apli/finca.png" title="Medicinas"  width="80%" height="80%"/>
                 </div>
                 <div style="width: 450px; height: 120px">
-                    <h2 class="mbr-fonts-style mbr-bold mbr-section-title3 display-5"><span>Programación académica</span></h2>
-                    <p class="mbr-fonts-style text1 mbr-text display-6">Programación de horarios por asignatura, nivel y periodo académico
-                        y formas<br>
+                    <h2 class="mbr-fonts-style mbr-bold mbr-section-title3 display-5"><span>Fincas</span></h2>
+                    <p class="mbr-fonts-style text1 mbr-text display-6">Registro de fincas productoras y sus
+                        productos<br>
                     </p>
                 </div>
             </div>
@@ -198,11 +197,12 @@
             <div class="col-lg-6 mbr-col-md-10">
                 <div class="wrap">
                     <div style="width: 200px; height: 140px">
-                        <asset:image src="apli/educacion.png" title="Cantones"  width="80%" height="80%"/>
+                        <asset:image src="apli/productos.png" title="Cantones"  width="80%" height="80%"/>
                     </div>
                     <div style="width: 450px; height: 120px">
-                        <h2 class="mbr-fonts-style mbr-bold mbr-section-title3 display-5"><span>Carreras</span></h2>
-                        <p class="mbr-fonts-style text1 mbr-text display-6">Carreras</p>
+                        <h2 class="mbr-fonts-style mbr-bold mbr-section-title3 display-5"><span>Productos</span></h2>
+                        <p class="mbr-fonts-style text1 mbr-text display-6">Regsitro de productos y su producción en las
+                        diferentes fincas</p>
                     </div>
                 </div>
             </div>
@@ -212,11 +212,11 @@
         <div class="col-lg-6 mbr-col-md-10">
             <div class="wrap">
                 <div style="width: 200px; height: 140px">
-                    <asset:image src="apli/educacion.png" title="Diagnóticos"  width="80%" height="80%"/>
+                    <asset:image src="apli/naviera.png" title="Diagnóticos"  width="80%" height="80%"/>
                 </div>
                 <div style="width: 450px; height: 120px">
-                    <h2 class="mbr-fonts-style mbr-bold mbr-section-title3 display-5"><span>Profesores</span></h2>
-                    <p class="mbr-fonts-style text1 mbr-text display-6">Profesores</p>
+                    <h2 class="mbr-fonts-style mbr-bold mbr-section-title3 display-5"><span>Navieras</span></h2>
+                    <p class="mbr-fonts-style text1 mbr-text display-6">Regsitro de navieras</p>
                 </div>
             </div>
         </div>
@@ -227,11 +227,11 @@
         <div class="col-lg-6 mbr-col-md-10">
             <div class="wrap">
                 <div style="width: 200px; height: 140px">
-                    <asset:image src="apli/educacion.png" title="Administración de Usuarios"  width="80%" height="80%"/>
+                    <asset:image src="apli/negocios.png" title="Administración de Usuarios"  width="80%" height="80%"/>
                 </div>
                 <div style="width: 450px; height: 120px">
                     <h2 class="mbr-fonts-style mbr-bold mbr-section-title3 display-5"><span>Administración de Usuarios</span></h2>
-                    <p class="mbr-fonts-style text1 mbr-text display-6">Administración de Usuarios del consultorios.
+                    <p class="mbr-fonts-style text1 mbr-text display-6">Administración de Usuarios del sistema.
                     Asingnación de usuarios y perfiles de acceso</p>
                 </div>
             </div>
@@ -242,7 +242,7 @@
             <div class="col-lg-6 mbr-col-md-10">
                 <div class="wrap">
                     <div style="width: 200px; height: 140px">
-                        <asset:image src="apli/educacion.png" title="Reportes"  width="80%" height="80%"/>
+                        <asset:image src="apli/reportes.png" title="Reportes"  width="80%" height="80%"/>
                     </div>
                     <div style="width: 450px; height: 120px">
                         <h2 class="mbr-fonts-style mbr-bold mbr-section-title3 display-5"><span>Reportes</span></h2>
@@ -254,21 +254,6 @@
             </div>
         </a>
 
-
-        <a href= "${createLink(controller:'buscarBase', action: 'busquedaBase')}" style="text-decoration: none">
-            <div class="col-lg-12 mbr-col-md-10">
-                <div class="wrap">
-                    <div style="width: 200px; height: 140px">
-                        <asset:image src="apli/reportes.png" title="Reportes"  width="80%" height="80%"/>
-                    </div>
-                    <div style="width: 450px; height: 120px">
-                        <h2 class="mbr-fonts-style mbr-bold mbr-section-title3 display-5"><span>Base de conocimiento</span></h2>
-                        <p class="mbr-fonts-style text1 mbr-text display-6">Registro de casos y soluciones adecuadas al caso<br>
-                            Consulta por temas</p>
-                    </div>
-                </div>
-            </div>
-        </a>
 
 
 
