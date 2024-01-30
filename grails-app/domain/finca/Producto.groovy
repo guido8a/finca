@@ -15,7 +15,7 @@ class Producto {
     String fairTrade
     int peso
     String empaque
-    String cajasPalet
+    int cajasPalet
 
     static auditable = true
 
@@ -49,7 +49,6 @@ class Producto {
         sku(size: 0..31, blank: true, nullable: true)
         calibre(blank: true, nullable: true)
         size(blank: true, nullable: true)
-        unindadesCaja(blank: true, nullable: true)
         tipo(size: 0..1, blank: true, nullable: true)
         marca(size: 0..31, blank: true, nullable: true)
         etiqueta(size: 0..31, blank: true, nullable: true)
@@ -58,6 +57,7 @@ class Producto {
         peso(blank: true, nullable: true)
         empaque(size: 0..31, blank: true, nullable: true)
         unindadesCaja(blank: true, nullable: true)
+        cajasPalet(blank: true, nullable: true)
     }
 
 }
