@@ -4,7 +4,7 @@ class Orden {
 
     Cliente cliente
     Semana semana
-    int cantidad
+    String estado  /* I ingresada, P en porceso, A aprobada*/
 
     static auditable = true
 
@@ -18,14 +18,14 @@ class Orden {
             id column: 'ordn__id'
             cliente column: 'clnt__id'
             semana column: 'smna__id'
-            cantidad column: 'ordncntd'
+            estado column: 'ordnetdo'
 
         }
     }
     static constraints = {
         cliente(blank: false, nullable: false)
         semana(blank: false, nullable: false)
-        cantidad(blank: false, nullable: false)
+        estado(blank: false, nullable: false)
     }
 
 }
