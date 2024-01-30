@@ -177,7 +177,7 @@
         </div>
     </a>
 
-    <a href= "${createLink(controller:'programa', action: 'horario')}" style="text-decoration: none">
+    <a href= "${createLink(controller:'finca', action: 'list')}" style="text-decoration: none">
         <div class="col-lg-6 mbr-col-md-10">
             <div class="wrap">
                 <div style="width: 200px; height: 140px">
@@ -193,7 +193,7 @@
         </div>
     </a>
 
-        <a href= "${createLink(controller:'carrera', action: 'list')}" style="text-decoration: none">
+        <a href= "${createLink(controller:'producto', action: 'list')}" style="text-decoration: none">
             <div class="col-lg-6 mbr-col-md-10">
                 <div class="wrap">
                     <div style="width: 200px; height: 140px">
@@ -208,7 +208,7 @@
             </div>
         </a>
 
-        <a href= "${createLink(controller:'profesor', action: 'list')}" style="text-decoration: none">
+        <a href= "${createLink(controller:'naviera', action: 'list')}" style="text-decoration: none">
         <div class="col-lg-6 mbr-col-md-10">
             <div class="wrap">
                 <div style="width: 200px; height: 140px">
