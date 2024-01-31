@@ -127,12 +127,12 @@
 </div>
 
 <div id="fnca" style="display:none">
-    <h3>Reporte Excel de profesores</h3><br>
-    <p>Listado de profesores</p>
+    <h3>Reporte Excel de órdenes de compra</h3><br>
+    <p>Listado de órdenes</p>
 </div>
 
-<div id="hora" style="display:none">
-    <h3>Reporte Excel del horario</h3><br>
+<div id="envíos" style="display:none">
+    <h3>Reporte Excel de envíos</h3><br>
     <p>Horario</p>
 </div>
 
