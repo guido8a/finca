@@ -1,1 +1,0 @@
-<g:select name="periodoFinal" from="${periodoFinal}" class="form-control input-sm" optionValue="descripcion" optionKey="id" />
