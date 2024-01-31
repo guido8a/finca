@@ -17,9 +17,6 @@
                         <a href="#" data-id="${finca?.id}" class="btn btn-danger btn-xs btn-borrar btn-ajax" title="Eliminar">
                             <i class="fa fa-trash"></i>
                         </a>
-                        <a href="#" data-id="${finca?.id}" class="btn btn-info btn-xs btn-show " title="Mostrar">
-                            <i class="fa fa-file"></i>
-                        </a>
                     </td>
                 </tr>
             </g:each>
@@ -45,31 +42,4 @@
         var id = $(this).data("id");
         deleteRow(id);
     });
-
-    $(".btn-show").click(function () {
-        var title = "Ver Producto";
-        var id = $(this).data("id");
-        %{--$.ajax({--}%
-        %{--    type: "POST",--}%
-        %{--    url: "${createLink(controller: 'producto', action:'show_ajax')}",--}%
-        %{--    data: {id: id},--}%
-        %{--    success: function (msg) {--}%
-        %{--        var b = bootbox.dialog({--}%
-        %{--            title: title,--}%
-        %{--            closeButton: false,--}%
-        %{--            message: msg,--}%
-        %{--            buttons: {--}%
-        %{--                aceptar: {--}%
-        %{--                    label: "Aceptar",--}%
-        %{--                    className: "btn-primary",--}%
-        %{--                    callback: function () {--}%
-        %{--                    }--}%
-        %{--                }--}%
-        %{--            }--}%
-        %{--        }); //dialog--}%
-        %{--    } //successJava--}%
-        %{--});--}%
-        %{--//location.reload()//ajax--}%
-    });
-
 </script>

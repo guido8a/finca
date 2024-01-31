@@ -143,7 +143,7 @@
         bootbox.dialog({
             title: "Alerta",
             message: "<i class='fa fa-trash fa-3x pull-left text-danger text-shadow'></i><p style='font-size: 14px; font-weight: bold'>" +
-                "¿Está seguro que desea eliminar este producto ? Esta acción no se puede deshacer.</p>",
+                "¿Está seguro que desea eliminar esta finca ? Esta acción no se puede deshacer.</p>",
             closeButton: false,
             buttons: {
                 cancelar: {
@@ -159,7 +159,7 @@
                         var db= cargarLoader("Borrando...");
                         $.ajax({
                             type: "POST",
-                            url: '${createLink(controller: 'producto', action:'delete_ajax')}',
+                            url: '${createLink(controller: 'finca', action:'delete_ajax')}',
                             data: {
                                 id: itemId
                             },
