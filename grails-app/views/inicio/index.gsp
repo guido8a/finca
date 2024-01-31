@@ -167,7 +167,7 @@
         <div class="col-lg-6 mbr-col-md-10">
             <div class="wrap">
                 <div style="width: 200px; height: 140px">
-                    <asset:image src="apli/fruta.png" title="Datos de pacientes"  width="80%" height="80%"/>
+                    <asset:image src="apli/fruta.png" title="Órdenes de Compra semanales"  width="80%" height="80%"/>
                 </div>
                 <div style="width: 450px; height: 220px">
                     <h2 class="mbr-fonts-style mbr-bold mbr-section-title3 display-5"><span>Órdenes de Compra</span></h2>
@@ -181,7 +181,7 @@
         <div class="col-lg-6 mbr-col-md-10">
             <div class="wrap">
                 <div style="width: 200px; height: 140px">
-                    <asset:image src="apli/finca.png" title="Medicinas"  width="80%" height="80%"/>
+                    <asset:image src="apli/finca.png" title="Fincas productoras"  width="80%" height="80%"/>
                 </div>
                 <div style="width: 450px; height: 120px">
                     <h2 class="mbr-fonts-style mbr-bold mbr-section-title3 display-5"><span>Fincas</span></h2>
@@ -197,7 +197,7 @@
             <div class="col-lg-6 mbr-col-md-10">
                 <div class="wrap">
                     <div style="width: 200px; height: 140px">
-                        <asset:image src="apli/productos.png" title="Cantones"  width="80%" height="80%"/>
+                        <asset:image src="apli/productos.png" title="Productos - frutas"  width="80%" height="80%"/>
                     </div>
                     <div style="width: 450px; height: 120px">
                         <h2 class="mbr-fonts-style mbr-bold mbr-section-title3 display-5"><span>Productos</span></h2>
@@ -212,7 +212,7 @@
         <div class="col-lg-6 mbr-col-md-10">
             <div class="wrap">
                 <div style="width: 200px; height: 140px">
-                    <asset:image src="apli/naviera.png" title="Diagnóticos"  width="80%" height="80%"/>
+                    <asset:image src="apli/naviera.png" title="Navieras"  width="80%" height="80%"/>
                 </div>
                 <div style="width: 450px; height: 120px">
                     <h2 class="mbr-fonts-style mbr-bold mbr-section-title3 display-5"><span>Navieras</span></h2>
