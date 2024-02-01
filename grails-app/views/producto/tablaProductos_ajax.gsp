@@ -19,7 +19,10 @@
                             <i class="fa fa-trash"></i>
                         </a>
                         <a href="#" data-id="${producto?.id}" class="btn btn-info btn-xs btn-show " title="Mostrar">
-                            <i class="fa fa-file"></i>
+                            <i class="fa fa-search-plus"></i>
+                        </a>
+                        <a href="#" data-id="${producto?.id}" class="btn btn-warning btn-xs btn-finca " title="Finca">
+                            <i class="fa fa-building"></i>
                         </a>
                     </td>
                 </tr>
@@ -53,6 +56,32 @@
         $.ajax({
             type: "POST",
             url: "${createLink(controller: 'producto', action:'show_ajax')}",
+            data: {id: id},
+            success: function (msg) {
+                var b = bootbox.dialog({
+                    title: title,
+                    closeButton: false,
+                    message: msg,
+                    buttons: {
+                        aceptar: {
+                            label: "Aceptar",
+                            className: "btn-primary",
+                            callback: function () {
+                            }
+                        }
+                    }
+                }); //dialog
+            } //successJava
+        });
+        //location.reload()//ajax
+    });
+
+    $(".btn-finca").click(function () {
+        var title = "Producto x Finca";
+        var id = $(this).data("id");
+        $.ajax({
+            type: "POST",
+            url: "${createLink(controller: 'producto', action:'productosXfinca_ajax')}",
             data: {id: id},
             success: function (msg) {
                 var b = bootbox.dialog({
