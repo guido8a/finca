@@ -2,6 +2,7 @@ package finca
 
 class Producto {
 
+    Familia familia
     String nombre
     String descripcion
     String sku
@@ -41,6 +42,7 @@ class Producto {
             peso column: 'prodpeso'
             empaque column: 'prodpack'
             cajasPalet column: 'prodcjpl'
+            familia column: 'faml__id'
         }
     }
     static constraints = {
@@ -58,6 +60,7 @@ class Producto {
         empaque(size: 0..31, blank: true, nullable: true)
         unindadesCaja(blank: true, nullable: true)
         cajasPalet(blank: true, nullable: true)
+        familia(blank: false, nullable: false)
     }
 
 }
