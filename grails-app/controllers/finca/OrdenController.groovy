@@ -95,4 +95,12 @@ class OrdenController {
         [cliente: clnt]
     }
 
+    def prod_ajax(){
+        println "prod_ajax: $params"
+        def faml = Familia.get(params.faml)
+        def prod   = Producto.findAllByFamilia(faml)
+        return[prod: prod]
+    }
+
+
 }

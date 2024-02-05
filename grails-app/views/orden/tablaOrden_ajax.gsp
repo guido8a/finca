@@ -2,12 +2,17 @@
     <table class="table table-bordered table-striped table-condensed table-hover">
         <thead>
         <tr>
-            <th style="width: 20%">Semana</th>
-            <th style="width: 34%">Producto</th>
-            <th style="width: 10%">Orden</th>
-            <th style="width: 10%">Estimado</th>
-            <th style="width: 8%">Diferencia</th>
-            <th style="width: 8%">Total</th>
+            <th style="width: 6%">Semana</th>
+            <th style="width: 26%">Producto</th>
+            <th style="width: 6%">Size</th>
+            <th style="width: 6%">Units</th>
+            <th style="width: 6%">Weight</th>
+            <th style="width: 6%">Packing</th>
+            <th style="width: 6%">Brand</th>
+            <th style="width: 8%">Order</th>
+            <th style="width: 8%">Estimated</th>
+            <th style="width: 6%">Difference</th>
+            <th style="width: 6%">Total</th>
             <th style="width: 10%">Acciones</th>
         </tr>
         </thead>
@@ -22,12 +27,18 @@
 
             <g:each in="${detalle}" status="i" var="dt">
                 <tr data-id="${dt.id}">
-                    <td style="width: 20%">(${dt?.orden.semana?.numero}) ${dt?.orden?.semana?.fechaInicio?.format('dd-MM-yyyy')} - ${dt?.orden?.semana?.fechaFin?.format('dd-MM-yyyy')}</td>
-                    <td style="width: 34%; text-align: left">${dt?.producto?.nombre}</td>
-                    <td style="width: 10%; text-align: left">${dt?.cantidad}</td>
-                    <td style="width: 10%; text-align: left">${dt?.cantidad}</td>
-                    <td style="width: 8%">${dt?.cantidad}</td>
-                    <td style="width: 8%">${dt?.cantidad}</td>
+                    %{--<td style="width: 20%">(${dt?.orden.semana?.numero}) ${dt?.orden?.semana?.fechaInicio?.format('dd-MM-yyyy')} - ${dt?.orden?.semana?.fechaFin?.format('dd-MM-yyyy')}</td>--}%
+                    <td style="width: 6%">${dt?.orden.semana?.numero}</td>
+                    <td style="width: 26%; text-align: left">${dt?.producto?.nombre}</td>
+                    <td style="width: 6%">${dt?.producto?.size}</td>
+                    <td style="width: 6%">${dt?.producto?.unindadesCaja}</td>
+                    <td style="width: 6%">${dt?.producto?.peso}</td>
+                    <td style="width: 6%">${dt?.producto?.empaque}</td>
+                    <td style="width: 6%">${dt?.producto?.marca}</td>
+                    <td style="width: 8%; text-align: left">${dt?.cantidad}</td>
+                    <td style="width: 8%; text-align: left">${dt?.cantidad}</td>
+                    <td style="width: 6%">${dt?.cantidad}</td>
+                    <td style="width: 6%">${dt?.cantidad}</td>
                     <td style="width: 10%">
                         <a href="#" class="btn btn-success btn-xs btnEditarOrden" title="Editar" data-id="${dt.id}"
                            data-prod="${dt?.producto?.id}" data-cntd="${dt?.cantidad}">
@@ -37,8 +48,9 @@
                            data-producto="${dt?.producto?.nombre}" title="Borrar">
                             <i class="fa fa-trash"></i>
                         </a>
-                        <a href="#" class="btn btn-info btn-xs btnObservacionOrden" data-id="${dt.id}" title="Observaciones">
-                            <i class="fa fa-book"></i>
+                        <a href="#" class="btn btn-info btn-xs distribucion" data-id="${dt.id}" title="Distribuir a fincas">
+                            %{--<i class="fa fa-tasks"></i>--}%
+                            <i class="fa fa-random"></i>
                         </a>
                     </td>
                 </tr>

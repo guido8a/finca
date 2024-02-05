@@ -1,4 +1,4 @@
-<%@ page import="finca.Producto; finca.Semana; finca.Cliente" %>
+<%@ page import="finca.Familia; finca.Producto; finca.Semana; finca.Cliente" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,31 +6,6 @@
     <title>Orden</title>
 
     <style type="text/css">
-    .gestion > td {
-        background-color: #ff8080;
-        color: #0c0460;
-    }
-
-    .normal > td {
-        background-color: #d7dff9;
-        color: #0c3440;
-    }
-    .usado {
-        text-align: center !important;
-        background-color: #91caef !important;
-    }
-    .otro {
-        text-align: center !important;
-        background-color: #d7bec8 !important;
-    }
-    .libre {
-    //background-color: #dadada;
-        color: #606060;
-    }
-    .horas {
-        text-align: center !important;
-    }
-
     .titl {
         font-family: 'open sans condensed';
         font-weight: bold;
@@ -54,15 +29,17 @@
     <div class="col-md-6">
         <h3 class="titl" style="text-align: right">Orden de Compra de ${cliente.nombre}</h3>
     </div>
-    <div class="col-md-3" style="margin-top: 14px">
-        %{--<label for="semana" class="control-label" style="text-align: right">--}%
-            %{--Semana--}%
-        %{--</label>--}%
+
+    <div class="col-md-2" style="margin-top: 14px">
+        %{--<g:select name="semana" from="${finca.Semana.list([sort: 'numero'])}"--}%
+        %{--class="form-control input-sm required text-info" optionValue="${{'Semana ' + it.numero + ' : ' + it.fechaInicio.format('dd-MM-yyyyy') +--}%
+        %{--" - " +  it.fechaFin.format('dd-MM-yyyyy')}}" optionKey="id"--}%
+        %{--/>--}%
         <g:select name="semana" from="${finca.Semana.list([sort: 'numero'])}"
-                  class="form-control input-sm required text-info" optionValue="${{'Semana ' + it.numero + ' : ' + it.fechaInicio.format('dd-MM-yyyyy') +
-                " - " +  it.fechaFin.format('dd-MM-yyyyy')}}" optionKey="id"
-        />
+                  class="form-control input-sm required text-info" optionValue="${{ 'Semana ' + it.numero }}"
+                  optionKey="id"/>
     </div>
+
     <div class="col-md-1">
         <a href="#" class="btn btn-sm btn-success" id="btnActual" style="margin-top: 14px">
             <i class="fa fa-sync"></i> Actualizar
@@ -74,25 +51,26 @@
 <div class="container" style="width: 1200px">
     <div class="btn-toolbar toolbar" style="margin-top: 10px">
 
-        <g:hiddenField name="idOrden" value="" />
+        <g:hiddenField name="idOrden" value=""/>
 
         <div class="col-md-12" style="margin-top: 25px">
-            <div class="col-md-3">
-
-            </div>
-            <div class="col-md-1">
-                <label for="producto" class="control-label" style="text-align: right">
-                    Producto
+            <div class="col-md-1" style="text-align: right">
+                <label for="familia" class="control-label" style="text-align: right">
+                    Familia
                 </label>
             </div>
 
-            <div class="col-md-4">
-                <g:select name="producto" from="${finca.Producto.list([sort: 'nombre'])}"
-                          class="form-control input-sm required" optionValue="nombre" optionKey="id"
-                />
+            <div class="col-md-1">
+                <g:select name="familia" from="${finca.Familia.list([sort: 'descripcion'])}"
+                          class="form-control input-sm required" optionValue="descripcion" optionKey="id"
+                          style="width: 85px; margin-left: -20px"/>
             </div>
 
-            <div class="col-md-1">
+            <div class="col-md-6" id="divProducto">
+
+            </div>
+
+            <div class="col-md-1" style="text-align: right">
                 <label for="cantidad" class="control-label" style="text-align: right">
                     Cantidad
                 </label>
@@ -119,7 +97,6 @@
                 </a>
             </div>
 
-
         </div>
     </div>
 
@@ -134,6 +111,25 @@
 <script type="text/javascript">
     var id = null;
 
+    $("#familia").change(function () {
+        var faml = $("#familia").val()
+        cargaProducto(faml);
+    });
+
+    cargaProducto($("#familia option:selected").val());
+
+    function cargaProducto(faml) {
+        $.ajax({
+            type: "POST",
+            url: "${createLink(controller: 'orden', action:'prod_ajax')}",
+            data: {
+                faml: faml
+            },
+            success: function (msg) {
+                $("#divProducto").html(msg);
+            } //success
+        });
+    }
 
     cargarTablaOrden();
 
@@ -147,7 +143,7 @@
         cancelarEdicion();
     });
 
-    function cargarTablaOrden(){
+    function cargarTablaOrden() {
         var smna = $("#semana option:selected").val();
         var ordn = $("#orden").val();
 //        var ck_prdo = $("#prdoChck").is(':checked');
@@ -168,7 +164,7 @@
         guardarGestion();
     });
 
-    function guardarGestion () {
+    function guardarGestion() {
         var d = cargarLoader("Guardando...");
         var id = $("#idOrden").val();
         var clnt = $("#cliente option:selected").val();
@@ -177,7 +173,7 @@
         var cntd = $("#cantidad").val();
         console.log('data:', id, clnt, smna, prod, cntd);
 
-        if(cntd != null && cntd !== ''){
+        if (cntd != null && cntd !== '') {
             $.ajax({
                 type: "POST",
                 url: "${createLink(controller: 'orden', action:'save_ajax')}",
@@ -191,20 +187,20 @@
                 success: function (msg) {
                     d.modal("hide");
                     var parts = msg.split("_");
-                    if(parts[0] === 'ok'){
-                        log(parts[1],  "success");
+                    if (parts[0] === 'ok') {
+                        log(parts[1], "success");
                         cargarTablaOrden();
-                    }else{
-                        bootbox.alert( '<div style="text-align: center">' +
-                            '<i class="fa fa-exclamation-triangle fa-2x text-danger"></i>'  +
-                            '<strong style="font-size: 14px">' +  parts[1] +  '</strong>' + '</div>')
+                    } else {
+                        bootbox.alert('<div style="text-align: center">' +
+                            '<i class="fa fa-exclamation-triangle fa-2x text-danger"></i>' +
+                            '<strong style="font-size: 14px">' + parts[1] + '</strong>' + '</div>')
                     }
                 } //success
             });
-        }else{
+        } else {
             d.modal("hide");
-            bootbox.alert( '<div style="text-align: center">' + '<i class="fa fa-exclamation-triangle fa-2x text-info"></i>'  +
-                '<strong style="font-size: 14px">' + ' Ingrese la cantidad de la Órden' +  '</strong>' + '</div>')
+            bootbox.alert('<div style="text-align: center">' + '<i class="fa fa-exclamation-triangle fa-2x text-info"></i>' +
+                '<strong style="font-size: 14px">' + ' Ingrese la cantidad de la Órden' + '</strong>' + '</div>')
         }
     }
 
@@ -212,7 +208,7 @@
         cancelarEdicion();
     });
 
-    function cancelarEdicion(){
+    function cancelarEdicion() {
         $("#producto").val('');
         $("#cantidad").val('');
         $("#divBoton").removeClass("hide");
@@ -229,38 +225,38 @@
     function borrarProducto(itemId, producto) {
         console.log('id', itemId, producto)
         bootbox.dialog({
-            title   : "Alerta",
-            message : '<div style="text-align: center">' + '<i class="fa fa-trash fa-2x text-danger"></i>'  +
-               ' ¿Está seguro que desea borrar ' + '<strong style="font-size: 14px">' +  producto + '?</strong></div>',
-            buttons : {
-                cancelar : {
-                    label     : "Cancelar",
-                    className : "btn-primary",
-                    callback  : function () {
+            title: "Alerta",
+            message: '<div style="text-align: center">' + '<i class="fa fa-trash fa-2x text-danger"></i>' +
+            ' ¿Está seguro que desea borrar ' + '<strong style="font-size: 14px">' + producto + '?</strong></div>',
+            buttons: {
+                cancelar: {
+                    label: "Cancelar",
+                    className: "btn-primary",
+                    callback: function () {
                     }
                 },
-                eliminar : {
-                    label     : "<i class='fa fa-trash'></i> Eliminar",
-                    className : "btn-danger",
-                    callback  : function () {
+                eliminar: {
+                    label: "<i class='fa fa-trash'></i> Eliminar",
+                    className: "btn-danger",
+                    callback: function () {
                         var v = cargarLoader("Eliminando...");
                         $.ajax({
-                            type    : "POST",
-                            url     : '${createLink(action:'borrarProducto_ajax')}',
-                            data    : {
-                                id : itemId
+                            type: "POST",
+                            url: '${createLink(action:'borrarProducto_ajax')}',
+                            data: {
+                                id: itemId
                             },
-                            success : function (msg) {
+                            success: function (msg) {
                                 v.modal("hide");
                                 var parts = msg.split("_");
-                                if(parts[0] === 'ok'){
-                                    log(parts[1],"success");
+                                if (parts[0] === 'ok') {
+                                    log(parts[1], "success");
                                     cargarTablaOrden();
                                     setTimeout(function () {
                                         cancelarEdicion();
                                     }, 800);
-                                }else{
-                                    log(parts[1],"error")
+                                } else {
+                                    log(parts[1], "error")
                                 }
                             }
                         });
@@ -284,15 +280,15 @@
          39         -> flecha der
          */
         return ((ev.keyCode >= 48 && ev.keyCode <= 57) ||
-            (ev.keyCode >= 96 && ev.keyCode <= 105) ||
-            ev.keyCode === 190 || ev.keyCode === 110 ||
-            ev.keyCode === 8 || ev.keyCode === 46 || ev.keyCode === 9 ||
-            ev.keyCode === 37 || ev.keyCode === 39);
+        (ev.keyCode >= 96 && ev.keyCode <= 105) ||
+        ev.keyCode === 190 || ev.keyCode === 110 ||
+        ev.keyCode === 8 || ev.keyCode === 46 || ev.keyCode === 9 ||
+        ev.keyCode === 37 || ev.keyCode === 39);
     }
 
-   $("#hora").keydown(function (ev) {
-       return validarNum(ev);
-   });
+    $("#hora").keydown(function (ev) {
+        return validarNum(ev);
+    });
 
 
 
