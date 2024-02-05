@@ -14,7 +14,7 @@ class Producto {
     String etiqueta
     String organico
     String fairTrade
-    int peso
+    double peso
     String empaque
     int cajasPalet
 

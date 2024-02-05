@@ -76,19 +76,19 @@
 
     cargarTotales();
 
-    function cargarTotales(){
-        var total = '${total}';
-        $.ajax({
-           type: 'POST',
-           url: '${createLink(controller: 'programa', action: 'tablaTotales_ajax')}',
-           data:{
-               total:total
-           },
-           success:function (msg) {
-               $("#divTotales").html(msg)
-           } 
-        });
-    }
+    %{--function cargarTotales(){--}%
+        %{--var total = '${total}';--}%
+        %{--$.ajax({--}%
+           %{--type: 'POST',--}%
+           %{--url: '${createLink(controller: 'programa', action: 'tablaTotales_ajax')}',--}%
+           %{--data:{--}%
+               %{--total:total--}%
+           %{--},--}%
+           %{--success:function (msg) {--}%
+               %{--$("#divTotales").html(msg)--}%
+           %{--} --}%
+        %{--});--}%
+    %{--}--}%
 
     $(".btnEditarOrden").click(function () {
         var id = $(this).data("id");
