@@ -13,6 +13,19 @@
         <g:form class="form-horizontal" name="frmProducto" role="form" controller="producto" action="saveProducto_ajax" method="POST">
             <g:hiddenField name="id" value="${producto?.id}"/>
 
+            <div class="form-group keeptogether ${hasErrors(bean: producto, field: 'familia', 'error')}">
+                <div class="col-md-12">
+                    <span class="grupo">
+                        <label for="familia" class="col-md-2 control-label">
+                            Familia
+                        </label>
+                        <span class="col-md-10">
+                            <g:select name="familia" from="${finca.Familia.list([sort: 'descripcion'])}" class="form-control" optionValue="descripcion" optionKey="id" value="${producto?.familia?.id}"/>
+                        </span>
+                    </span>
+                </div>
+            </div>
+
             <div class="form-group keeptogether ${hasErrors(bean: producto, field: 'nombre', 'error')} required">
                 <div class="col-md-12">
                     <span class="grupo">
