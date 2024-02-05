@@ -19,6 +19,12 @@
 
 <div class="btn-toolbar toolbar" style="margin-top: 10px">
     <div class="col-md-12">
+        <label for="familia" class="col-md-1 control-label text-info" style="text-align: right">
+            Familia
+        </label>
+        <div class="col-md-3">
+            <g:select name="familia" from="${finca.Familia.list([sort: 'descripcion'])}" optionKey="id" optionValue="descripcion" class="form-control" noSelection="${[null: 'Todas']}" />
+        </div>
         <label for="nombre" class="col-md-1 control-label text-info" style="text-align: right">
             Nombre
         </label>
@@ -61,20 +67,22 @@
     $(".btnLimpiar").click(function ( ) {
         cargarTablaProducto('');
         $("#nombre").val('');
+        $("#familia").val('null');
     });
 
     $(".btnBuscar").click(function () {
-        cargarTablaProducto($("#nombre").val());
+        cargarTablaProducto($("#nombre").val(), $("#familia option:selected").val());
     });
 
-    cargarTablaProducto($("#nombre").val());
+    cargarTablaProducto($("#nombre").val(), $("#familia option:selected").val());
 
-    function cargarTablaProducto(nombre){
+    function cargarTablaProducto(nombre, familia){
         $.ajax({
             type: "POST",
             url: "${createLink(controller: 'producto', action:'tablaProductos_ajax')}",
             data: {
-                nombre: nombre
+                nombre: nombre,
+                familia: familia
             },
             success: function (msg) {
                 $("#divProducto").html(msg);
@@ -129,7 +137,7 @@
                     var parts = msg.split("_");
                     if(parts[0] === 'ok'){
                         log(parts[1], "success");
-                        cargarTablaProducto($("#nombre").val());
+                        cargarTablaProducto($("#nombre").val(), $("#familia option:selected").val());
                     }else{
                         bootbox.alert('<i class="fa fa-exclamation-triangle text-danger fa-3x"></i> ' + '<strong style="font-size: 14px">' + parts[1] + '</strong>');
                         return false;
@@ -170,7 +178,7 @@
                                 var parts = msg.split("_");
                                 if (parts[0] === 'ok') {
                                     log(parts[1], "success");
-                                    cargarTablaProducto($("#nombre").val());
+                                    cargarTablaProducto($("#nombre").val(), $("#familia option:selected").val());
                                 } else {
                                     bootbox.alert('<i class="fa fa-exclamation-triangle text-danger fa-3x"></i> ' + '<strong style="font-size: 14px">' + parts[1] + '</strong>');
                                 }

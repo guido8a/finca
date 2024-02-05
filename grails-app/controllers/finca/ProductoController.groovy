@@ -8,11 +8,22 @@ class ProductoController {
 
     def tablaProductos_ajax(){
         def productos
-        if(params.nombre){
-            productos = Producto.findAllByNombreIlike('%' + params.nombre + '%').sort{it.nombre}
+
+        if(params.familia != 'null'){
+            def familia = Familia.get(params.familia)
+            if(params.nombre){
+                productos = Producto.findAllByNombreIlikeAndFamilia('%' + params.nombre + '%', familia).sort{it.nombre}
+            }else{
+                productos = Producto.findAllByFamilia(familia).sort{it.nombre}
+            }
         }else{
-            productos = Producto.list([sort: 'nombre'])
+            if(params.nombre){
+                productos = Producto.findAllByNombreIlike('%' + params.nombre + '%').sort{it.nombre}
+            }else{
+                productos = Producto.list([sort: 'nombre'])
+            }
         }
+
         return[productos: productos]
     }
 
