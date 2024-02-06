@@ -118,27 +118,45 @@
     }
 
     $("#btnAgregar").click(function () {
-        var d = cargarLoader("Guardando...");
-        $.ajax({
-            type    : "POST",
-            url     : "${createLink(controller: 'orden', action: 'saveDistribuir_ajax')}",
-            data    : {
+        var cantidad = $("#cantidadDistribuir").val();
+        var finca = $("#finca option:selected").val();
+        var dtor = '${detalle?.id}';
 
-            },
-            success : function (msg) {
-                d.modal('hide');
-                var parts = msg.split("_");
-                if(parts[0] === 'ok'){
-                    log(parts[1], "success");
-                    cargarTablaDistribucion();
-                    cargarFincas();
-                    cargarEstimado();
-                }else{
-                    bootbox.alert('<i class="fa fa-exclamation-triangle text-danger fa-3x"></i> ' + '<strong style="font-size: 14px">' + parts[1] + '</strong>');
-                    return false;
-                }
+        if(cantidad){
+            if(finca){
+                var d = cargarLoader("Guardando...");
+                $.ajax({
+                    type    : "POST",
+                    url     : "${createLink(controller: 'orden', action: 'saveDistribuir_ajax')}",
+                    data    : {
+                        id: dtor,
+                        finca: finca,
+                        cantidad: cantidad
+                    },
+                    success : function (msg) {
+                        d.modal('hide');
+                        var parts = msg.split("_");
+                        if(parts[0] === 'ok'){
+                            log(parts[1], "success");
+                            cargarTablaDistribucion();
+                            cargarFincas();
+                            cargarEstimado();
+                        }else{
+                            bootbox.alert('<i class="fa fa-exclamation-triangle text-danger fa-3x"></i> ' + '<strong style="font-size: 14px">' + parts[1] + '</strong>');
+                            return false;
+                        }
+                    }
+                });
+            }else{
+                bootbox.alert('<i class="fa fa-exclamation-triangle text-danger fa-3x"></i> ' + '<strong style="font-size: 14px">' + "Seleccione la finca" + '</strong>');
+                return false;
             }
-        });
+        }else{
+            bootbox.alert('<i class="fa fa-exclamation-triangle text-danger fa-3x"></i> ' + '<strong style="font-size: 14px">' + "Ingrese la cantidad" + '</strong>');
+            return false;
+        }
+
+
     });
 
     function validarNum(ev) {

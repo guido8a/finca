@@ -10,10 +10,7 @@
                     <td style="width: 10%">${detalle?.estimado}</td>
                     <td style="width: 10%">${detalle?.diferencia}</td>
                     <td style="width: 10%; text-align: center">
-                        <a href="#" data-id="${detalle?.id}" class="btn btn-success btn-xs btn-edit btn-ajax" title="Editar">
-                            <i class="fa fa-edit"></i>
-                        </a>
-                        <a href="#" data-id="${detalle?.id}" class="btn btn-danger btn-xs btn-borrar btn-ajax" title="Eliminar">
+                        <a href="#" data-id="${detalle?.id}" class="btn btn-danger btn-xs btnBorrarDistribuir btn-ajax" title="Eliminar">
                             <i class="fa fa-trash"></i>
                         </a>
                     </td>
@@ -33,13 +30,52 @@
 
 <script type="text/javascript">
 
-    $(".btn-edit").click(function () {
+    function deleteRowD(itemId) {
+        bootbox.dialog({
+            title: "Alerta",
+            message: "<i class='fa fa-trash fa-3x pull-left text-danger text-shadow'></i><p style='font-size: 14px; font-weight: bold'>" +
+                "¿Está seguro que desea eliminar este registro ? Esta acción no se puede deshacer.</p>",
+            closeButton: false,
+            buttons: {
+                cancelar: {
+                    label: "Cancelar",
+                    className: "btn-primary",
+                    callback: function () {
+                    }
+                },
+                eliminar: {
+                    label: "<i class='fa fa-trash'></i> Eliminar",
+                    className: "btn-danger",
+                    callback: function () {
+                        var db= cargarLoader("Borrando...");
+                        $.ajax({
+                            type: "POST",
+                            url: '${createLink(controller: 'orden', action:'borrarDistribuir_ajax')}',
+                            data: {
+                                id: itemId
+                            },
+                            success: function (msg) {
+                                db.modal("hide");
+                                var parts = msg.split("_");
+                                if (parts[0] === 'ok') {
+                                    log(parts[1], "success");
+                                    cargarTablaDistribucion();
+                                    cargarFincas();
+                                    cargarEstimado();
+                                } else {
+                                    bootbox.alert('<i class="fa fa-exclamation-triangle text-danger fa-3x"></i> ' + '<strong style="font-size: 14px">' + parts[1] + '</strong>');
+                                }
+                            }
+                        });
+                    }
+                }
+            }
+        });
+    }
+
+    $(".btnBorrarDistribuir").click(function () {
         var id = $(this).data("id");
-        createEditRowPersona(id);
-    });
-    $(".btn-borrar").click(function () {
-        var id = $(this).data("id");
-        deleteRow(id);
+        deleteRowD(id)
     });
 
 </script>
