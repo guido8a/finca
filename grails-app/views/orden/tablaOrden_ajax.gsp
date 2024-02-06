@@ -41,7 +41,7 @@
                     <td style="width: 6%">${dt?.cantidad}</td>
                     <td style="width: 10%">
                         <a href="#" class="btn btn-success btn-xs btnEditarOrden" title="Editar" data-id="${dt.id}"
-                           data-prod="${dt?.producto?.id}" data-cntd="${dt?.cantidad}">
+                           data-prod="${dt?.producto?.id}" data-cntd="${dt?.cantidad}" data-fam="${dt?.producto?.familia?.id}">
                             <i class="fa fa-edit"></i>
                         </a>
                         <a href="#" class="btn btn-danger btn-xs btnBorrarOrden" data-id="${dt.id}"
@@ -120,11 +120,19 @@
         var id = $(this).data("id");
         var prod = $(this).data("prod");
         var cntd = $(this).data("cntd");
+        var fam = $(this).data("fam");
+
+
 
         $("#idOrden").val(id);
-        $("#producto").val(prod);
-        $("#cantidad").val(cntd);
+        $("#familia").val(fam);
+        cargaProducto(fam);
 
+        setTimeout(function () {
+            $("#producto").val(prod);
+        }, 600);
+
+        $("#cantidad").val(cntd);
         $("#divBoton").addClass("hide");
         $("#divBoton2").removeClass("hide");
     });

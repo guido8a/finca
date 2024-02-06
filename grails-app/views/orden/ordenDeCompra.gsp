@@ -90,7 +90,7 @@
 
             <div class="col-md-1 hide" id="divBoton2" style="width: 180px; padding: 0; margin-left: -5px">
                 <a href="#" class="btn btn-success" id="btnGuardarEdicion" title="Guardar">
-                    <i class="fa fa-save"></i> Guradar
+                    <i class="fa fa-save"></i> Guardar
                 </a>
                 <a href="#" class="btn btn-info" id="btnCancelarEdicion" title="Cancelar">
                     <i class="fa fa-times"></i> Cancelar
@@ -112,7 +112,7 @@
     var id = null;
 
     $("#familia").change(function () {
-        var faml = $("#familia").val()
+        var faml = $("#familia option:selected").val();
         cargaProducto(faml);
     });
 
@@ -134,11 +134,13 @@
     cargarTablaOrden();
 
     $("#semana").change(function () {
+        cargaProducto($("#familia option:selected").val());
         cargarTablaOrden();
         cancelarEdicion();
     });
 
     $("#btnActual").click(function () {
+        cargaProducto($("#familia option:selected").val());
         cargarTablaOrden();
         cancelarEdicion();
     });
@@ -213,6 +215,7 @@
         $("#cantidad").val('');
         $("#divBoton").removeClass("hide");
         $("#divBoton2").addClass("hide");
+        cargaProducto($("#familia option:selected").val());
     }
 
     $("#btnGuardarEdicion").click(function () {
