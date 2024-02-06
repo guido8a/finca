@@ -102,5 +102,34 @@ class OrdenController {
         return[prod: prod]
     }
 
+    def distribuir_ajax(){
+        def dtor = DetalleOrden.get(params.id)
+        return[detalle: dtor]
+    }
+
+    def estimado_ajax(){
+        def dtor = DetalleOrden.get(params.id)
+        def detallesFincas = DetalleFinca.findAllByDetalleOrden(dtor)
+        def estimado = detallesFincas.size() > 0 ? detallesFincas*.cantidad.sum() : 0
+        def diferencia= dtor.cantidad - estimado?.toInteger()
+        return[detalles: detallesFincas, estimado: estimado, diferencia: diferencia]
+    }
+
+    def fincas_ajax(){
+        def dtor = DetalleOrden.get(params.id)
+        def detallesFincas = DetalleFinca.findAllByDetalleOrden(dtor)
+        def fincas = (detallesFincas.size() > 0 ? (Finca.list() - detallesFincas*.finca) : Finca.list([sort: 'nombre']))
+        return [fincas: fincas]
+    }
+
+    def tablaDistribuir_ajax(){
+        def dtor = DetalleOrden.get(params.id)
+        def detallesFincas = DetalleFinca.findAllByDetalleOrden(dtor)
+        return[detalles: detallesFincas]
+    }
+
+    def saveDistribuir_ajax(){
+
+    }
 
 }

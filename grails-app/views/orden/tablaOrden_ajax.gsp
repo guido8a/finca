@@ -28,7 +28,7 @@
             <g:each in="${detalle}" status="i" var="dt">
                 <tr data-id="${dt.id}">
                     %{--<td style="width: 20%">(${dt?.orden.semana?.numero}) ${dt?.orden?.semana?.fechaInicio?.format('dd-MM-yyyy')} - ${dt?.orden?.semana?.fechaFin?.format('dd-MM-yyyy')}</td>--}%
-                    <td style="width: 6%">${dt?.orden.semana?.numero}</td>
+                    <td style="width: 6%">${dt?.orden?.semana?.numero}</td>
                     <td style="width: 26%; text-align: left">${dt?.producto?.nombre}</td>
                     <td style="width: 6%">${dt?.producto?.size}</td>
                     <td style="width: 6%">${dt?.producto?.unindadesCaja}</td>
@@ -48,8 +48,7 @@
                            data-producto="${dt?.producto?.nombre}" title="Borrar">
                             <i class="fa fa-trash"></i>
                         </a>
-                        <a href="#" class="btn btn-info btn-xs distribucion" data-id="${dt.id}" title="Distribuir a fincas">
-                            %{--<i class="fa fa-tasks"></i>--}%
+                        <a href="#" class="btn btn-info btn-xs btnDistribucion" data-id="${dt.id}" title="Distribuir a fincas">
                             <i class="fa fa-random"></i>
                         </a>
                     </td>
@@ -74,7 +73,34 @@
 
 <script type="text/javascript">
 
-    cargarTotales();
+    $(".btnDistribucion").click(function () {
+        var title = "Distribución por Finca";
+        var id = $(this).data("id");
+        $.ajax({
+            type: "POST",
+            url: "${createLink(controller: 'orden', action:'distribuir_ajax')}",
+            data: {id: id},
+            success: function (msg) {
+                var b = bootbox.dialog({
+                    title: title,
+                    closeButton: false,
+                    class: "modal-lg",
+                    message: msg,
+                    buttons: {
+                        aceptar: {
+                            label: "Aceptar",
+                            className: "btn-primary",
+                            callback: function () {
+                            }
+                        }
+                    }
+                }); //dialog
+            } //successJava
+        });
+        //location.reload()//ajax
+    });
+
+    // cargarTotales();
 
     %{--function cargarTotales(){--}%
         %{--var total = '${total}';--}%
