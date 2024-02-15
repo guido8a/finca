@@ -68,30 +68,30 @@ option[selected]{
                 </div>
             </div>
             <div class="form-group keeptogether ${hasErrors(bean: personaInstance, field: 'mail', 'error')} ${hasErrors(bean: personaInstance, field: 'telefono', 'error')} ">
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <span class="grupo">
-                        <label for="mail" class="col-md-4 control-label">
+                        <label for="mail" class="col-md-2 control-label">
                             E-mail
                         </label>
 
-                        <div class="col-md-8">
+                        <div class="col-md-10">
                             <div class="input-group input-group-sm"><span class="input-group-addon"><i class="fa fa-envelope"></i>
                             </span><g:field type="email" name="mail" maxlength="63" class="form-control input-sm unique noEspacios"
-                                            value="${personaInstance?.mail ?: '@empr.com'}"/>
+                                            value="${personaInstance?.mail ?: '@empresa.com'}"/>
                             </div>
-                            %{--<g:textField name="mail" maxlength="63" class="form-control input-sm unique email noEspacios"--}%
-                                         %{--value="${personaInstance?.mail ?: ''}" />--}%
                         </div>
                     </span>
                 </div>
+            </div>
+            <div class="form-group keeptogether ${hasErrors(bean: personaInstance, field: 'mail', 'error')} ${hasErrors(bean: personaInstance, field: 'telefono', 'error')} ">
 
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <span class="grupo">
-                        <label for="telefono" class="col-md-4 control-label">
+                        <label for="telefono" class="col-md-2 control-label">
                             Teléfono
                         </label>
 
-                        <div class="col-md-8">
+                        <div class="col-md-10">
                             <g:textField name="telefono" maxlength="31" class="form-control input-sm digits" value="${personaInstance?.telefono}"/>
                         </div>
                     </span>
