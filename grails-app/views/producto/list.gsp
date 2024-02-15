@@ -22,13 +22,13 @@
         <label for="familia" class="col-md-1 control-label text-info" style="text-align: right">
             Familia
         </label>
-        <div class="col-md-3">
+        <div class="col-md-2">
             <g:select name="familia" from="${finca.Familia.list([sort: 'descripcion'])}" optionKey="id" optionValue="descripcion" class="form-control" noSelection="${[null: 'Todas']}" />
         </div>
         <label for="nombre" class="col-md-1 control-label text-info" style="text-align: right">
             Nombre
         </label>
-        <div class="col-md-3">
+        <div class="col-md-4">
             <g:textField name="nombre" class="form-control" />
         </div>
         <a href="#" class="btn btn-success btnBuscar">
