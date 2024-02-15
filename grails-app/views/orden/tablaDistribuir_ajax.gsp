@@ -4,12 +4,17 @@
         <g:if test="${detalles.size() > 0}">
             <g:each in="${detalles}" var="detalle">
                 <tr>
-                    <td style="width: 30%">${detalle?.finca?.nombre}</td>
-                    <td style="width: 30%">${detalle?.detalleOrden?.producto?.nombre}</td>
-                    <td style="width: 10%">${detalle?.cantidad}</td>
-                    <td style="width: 10%">${detalle?.estimado}</td>
-                    <td style="width: 10%">${detalle?.diferencia}</td>
-                    <td style="width: 10%; text-align: center">
+                    <td style="width: 14%">${detalle?.finca?.nombre}</td>
+                    <td style="width: 14%">${detalle?.detalleOrden?.producto?.nombre}</td>
+                    <td style="width: 8%">${detalle?.detalleOrden?.producto?.size}</td>
+                    <td style="width: 8%">${detalle?.detalleOrden?.producto?.unindadesCaja}</td>
+                    <td style="width: 8%">${detalle?.detalleOrden?.producto?.peso}</td>
+                    <td style="width: 8%">${detalle?.detalleOrden?.producto?.empaque}</td>
+                    <td style="width: 8%">${detalle?.detalleOrden?.producto?.marca}</td>
+                    <td style="width: 8%">${detalle?.cantidad}</td>
+                    <td style="width: 8%">${detalle?.estimado}</td>
+                    <td style="width: 8%">${detalle?.diferencia}</td>
+                    <td style="width: 8%; text-align: center">
                         <a href="#" data-id="${detalle?.id}" class="btn btn-danger btn-xs btnBorrarDistribuir btn-ajax" title="Eliminar">
                             <i class="fa fa-trash"></i>
                         </a>

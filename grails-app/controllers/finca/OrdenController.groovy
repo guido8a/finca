@@ -6,16 +6,16 @@ class OrdenController {
         def orden = Orden.list().sort{it.numero}
         return[orden: orden]
     }
-     def form_ajax(){
+    def form_ajax(){
 
         def orden
-         def countries = [] as SortedSet
+        def countries = [] as SortedSet
 
-         Locale.availableLocales*.displayCountry.each {
-             if (it) {
-                 countries << it
-             }
-         }
+        Locale.availableLocales*.displayCountry.each {
+            if (it) {
+                countries << it
+            }
+        }
 
         if(params.id){
             orden = Orden.get(params.id)
@@ -128,28 +128,45 @@ class OrdenController {
         return[detalles: detallesFincas]
     }
 
+//    def saveDistribuir_ajax(){
+//        def dtor = DetalleOrden.get(params.id)
+//        def finca = Finca.get(params.finca)
+//        def detallesFincas = DetalleFinca.findAllByDetalleOrden(dtor)
+//        def estimado = detallesFincas.size() > 0 ? detallesFincas*.cantidad.sum() : 0
+//        def diferencia= dtor.cantidad - estimado?.toInteger()
+//
+//        if(params.cantidad.toInteger() > diferencia){
+//            render "no_La cantidad ingresada es mayor a la diferencia disponible"
+//            return true
+//        }else{
+//            def detalle = new DetalleFinca()
+//            detalle.detalleOrden = dtor
+//            detalle.finca = finca
+//            detalle.cantidad = params.cantidad.toInteger()
+//
+//            if(!detalle.save(flush: true)){
+//                println("Error al guardar " + detalle.errors)
+//                render "no_Error al guardar"
+//            }else{
+//                render "ok_Guardado correctamente"
+//            }
+//        }
+//    }
+
     def saveDistribuir_ajax(){
         def dtor = DetalleOrden.get(params.id)
         def finca = Finca.get(params.finca)
-        def detallesFincas = DetalleFinca.findAllByDetalleOrden(dtor)
-        def estimado = detallesFincas.size() > 0 ? detallesFincas*.cantidad.sum() : 0
-        def diferencia= dtor.cantidad - estimado?.toInteger()
 
-        if(params.cantidad.toInteger() > diferencia){
-            render "no_La cantidad ingresada es mayor a la diferencia disponible"
-            return true
+        def detalle = new DetalleFinca()
+        detalle.detalleOrden = dtor
+        detalle.finca = finca
+        detalle.cantidad = params.cantidad.toInteger()
+
+        if(!detalle.save(flush: true)){
+            println("Error al guardar " + detalle.errors)
+            render "no_Error al guardar"
         }else{
-            def detalle = new DetalleFinca()
-            detalle.detalleOrden = dtor
-            detalle.finca = finca
-            detalle.cantidad = params.cantidad.toInteger()
-
-            if(!detalle.save(flush: true)){
-                println("Error al guardar " + detalle.errors)
-                render "no_Error al guardar"
-            }else{
-                render "ok_Guardado correctamente"
-            }
+            render "ok_Guardado correctamente"
         }
     }
 

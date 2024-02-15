@@ -4,13 +4,13 @@
         <g:if test="${productos.size() > 0}">
             <g:each in="${productos}" var="producto">
                 <tr data-id="${producto?.id}">
-                    <td style="width: 20%">${producto?.nombre}</td>
-                    <td style="width: 20%">${producto?.descripcion}</td>
-                    <td style="width: 10%">${producto?.sku}</td>
-                    <td style="width: 10%">${producto?.calibre}</td>
-                    <td style="width: 10%">${producto?.size}</td>
-                    <td style="width: 10%">${producto?.unindadesCaja}</td>
-                    <td style="width: 10%">${producto?.peso}</td>
+                    <td style="width: 10%">${producto?.familia?.descripcion}</td>
+                    <td style="width: 24%">${producto?.nombre}</td>
+                    <td style="width: 24%">${producto?.descripcion}</td>
+                    <td style="width: 8%">${producto?.calibre}</td>
+                    <td style="width: 8%">${producto?.size}</td>
+                    <td style="width: 8%">${producto?.unindadesCaja}</td>
+                    <td style="width: 8%">${producto?.peso}</td>
                     <td style="width: 10%; text-align: center">
                         <a href="#" data-id="${producto?.id}" class="btn btn-success btn-xs btn-edit btn-ajax" title="Editar">
                             <i class="fa fa-edit"></i>

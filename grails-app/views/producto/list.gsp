@@ -44,13 +44,13 @@
 <table class="table table-condensed table-bordered table-striped table-hover">
     <thead>
     <tr>
-        <th style="width: 20%">Nombre</th>
-        <th style="width: 20%">Descripción</th>
-        <th style="width: 10%">Sku</th>
-        <th style="width: 10%">Calibre</th>
-        <th style="width: 10%">Size</th>
-        <th style="width: 10%">Unidades</th>
-        <th style="width: 10%">Peso</th>
+        <th style="width: 10%">Familia</th>
+        <th style="width: 24%">Nombre</th>
+        <th style="width: 24%">Descripción</th>
+        <th style="width: 8%">Calibre</th>
+        <th style="width: 8%">Size</th>
+        <th style="width: 8%">Unidades</th>
+        <th style="width: 8%">Peso</th>
         <th style="width: 10%">Acciones</th>
     </tr>
     </thead>

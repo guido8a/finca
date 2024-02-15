@@ -12,15 +12,15 @@ class ProductoController {
         if(params.familia != 'null'){
             def familia = Familia.get(params.familia)
             if(params.nombre){
-                productos = Producto.findAllByNombreIlikeAndFamilia('%' + params.nombre + '%', familia).sort{it.nombre}
+                productos = Producto.findAllByNombreIlikeAndFamilia('%' + params.nombre + '%', familia).sort{it.familia.descripcion}
             }else{
-                productos = Producto.findAllByFamilia(familia).sort{it.nombre}
+                productos = Producto.findAllByFamilia(familia).sort{it.familia.descripcion}
             }
         }else{
             if(params.nombre){
-                productos = Producto.findAllByNombreIlike('%' + params.nombre + '%').sort{it.nombre}
+                productos = Producto.findAllByNombreIlike('%' + params.nombre + '%').sort{it.familia.descripcion}
             }else{
-                productos = Producto.list([sort: 'nombre'])
+                productos = Producto.list().sort{it.familia.descripcion}
             }
         }
 

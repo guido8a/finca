@@ -52,12 +52,17 @@
     <table class="table table-condensed table-bordered table-striped table-hover" style="margin-top: 10px">
         <thead>
         <tr>
-            <th style="width: 30%">Finca</th>
-            <th style="width: 30%">Producto</th>
-            <th style="width: 10%">Cantidad</th>
-            <th style="width: 10%">Estimado</th>
-            <th style="width: 10%">Diferencia</th>
-            <th style="width: 10%">Acciones</th>
+            <th style="width: 14%">Finca</th>
+            <th style="width: 14%">Producto</th>
+            <th style="width: 8%">Size</th>
+            <th style="width: 8%">Units</th>
+            <th style="width: 8%">Weight</th>
+            <th style="width: 8%">Packing</th>
+            <th style="width: 8%">Brand</th>
+            <th style="width: 8%">Cantidad</th>
+            <th style="width: 8%">Estimado</th>
+            <th style="width: 8%">Diferencia</th>
+            <th style="width: 8%">Acciones</th>
         </tr>
         </thead>
     </table>
