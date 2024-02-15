@@ -251,6 +251,21 @@ option[selected]{
                     </span>
                 </div>
             </div>
+
+            <div class="form-group keeptogether ${hasErrors(bean: personaInstance, field: 'finca', 'error')}">
+                <div class="col-md-6">
+                    <span class="grupo">
+                        <label for="finca" class="col-md-4 control-label">
+                            Finca
+                        </label>
+                        <span class="col-md-8">
+                            <div class="input-group input-group-sm">
+%{--                               <g:select name="" from=""  --}%
+                            </div>
+                        </span>
+                    </span>
+                </div>
+            </div>
         </g:form>
     </div>
 

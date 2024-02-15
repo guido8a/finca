@@ -1,6 +1,7 @@
 package seguridad
 
 import audita.Auditable
+import finca.Finca
 
 class Persona implements Auditable{
 
@@ -23,6 +24,7 @@ class Persona implements Auditable{
     String sigla
     String discapacidad
     String autorizacion
+    Finca finca
 
     static auditable = true
 
@@ -57,6 +59,7 @@ class Persona implements Auditable{
             discapacidad column: 'prsndscp'
             direccion column: 'prsndire'
             referencia column: 'prsnrefe'
+            finca column: 'fnca__id'
         }
     }
     static constraints = {
@@ -79,6 +82,7 @@ class Persona implements Auditable{
         discapacidad(size: 0..15, blank: true, nullable: true)
         direccion(size: 0..255, blank: true, nullable: true)
         referencia(size: 0..255, blank: true, nullable: true)
+        finca(blank: true, nullable: true)
     }
 
     String toString() {
