@@ -75,10 +75,12 @@ option[selected]{
                         </label>
 
                         <div class="col-md-8">
-%{--                            <div class="input-group input-group-sm"><span class="input-group-addon"><i class="fa fa-envelope"></i>--}%
-%{--                            </span><g:field type="email" name="mail" maxlength="63" class="form-control input-sm unique noEspacios" value="${personaInstance?.mail ?: ''}"/>--}%
-%{--                            </div>--}%
-                            <g:textField name="mail" maxlength="63" class="form-control input-sm unique email noEspacios"  value="${personaInstance?.mail ?: ''}" />
+                            <div class="input-group input-group-sm"><span class="input-group-addon"><i class="fa fa-envelope"></i>
+                            </span><g:field type="email" name="mail" maxlength="63" class="form-control input-sm unique noEspacios"
+                                            value="${personaInstance?.mail ?: '@empr.com'}"/>
+                            </div>
+                            %{--<g:textField name="mail" maxlength="63" class="form-control input-sm unique email noEspacios"--}%
+                                         %{--value="${personaInstance?.mail ?: ''}" />--}%
                         </div>
                     </span>
                 </div>

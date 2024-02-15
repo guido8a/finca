@@ -77,19 +77,24 @@ class OrdenController {
     }
 
     def tablaOrden_ajax(){
-        println "tablaOrdn: ${params}"
+//        println "tablaOrdn: ${params}"
         def cn = dbConnectionService.getConnection()
         def smna = Semana.get(params.smna)
         def ordn = Orden.findAllBySemana(smna)
-        def detalle
+        def sql = ""
+        def detalle = []
 
+//        println "ordn: ${ordn.size()}"
         if(ordn.size() > 1) {
             flash.message("Error")
-        } else {
-//            detalle = DetalleOrden.findAllByOrden(ordn, [sort: 'producto.nombre'])
-            detalle = cn.rows("select * from orden(1,1)".toString())
+        } else if(ordn.size() == 1){
+//            sql = "select * from orden(${ordn[0].cliente.id}, ${ordn[0].semana.id})"
+            sql = "select * from orden(1, ${ordn[0]?.semana.id})"
+//            println "sql. $sql"
+            detalle = cn.rows(sql.toString())
         }
-        println "--> $detalle"
+
+//        println "--> $detalle"
         return [detalle: detalle, ordn: ordn, smna: smna]
     }
 
