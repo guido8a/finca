@@ -27,7 +27,7 @@
 
 <div class="col-md-12">
     <div class="col-md-6">
-        <h3 class="titl" style="text-align: right">Asignación a la Finca ${usro?.finca?.nombre}</h3>
+        <h3 class="titl" style="text-align: right">Asignaciones para la Finca ${usro?.finca?.nombre}</h3>
         %{--<h3 class="titl" style="text-align: right">Asignación a la Finca ...</h3>--}%
     </div>
 

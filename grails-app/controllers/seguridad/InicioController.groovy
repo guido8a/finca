@@ -6,23 +6,18 @@ class InicioController {
     def diasLaborablesService
 
     def index() {
-/*
-        if (session.usuario.getPuedeDirector()) {
-            redirect(controller: "retrasadosWeb", action: "reporteRetrasadosConsolidadoDir", params: [dpto: Persona.get(session.usuario.id).departamento.id, inicio: "1", dir: "1"])
-        } else {
-            if (session.usuario.getPuedeJefe()) {
-                redirect(controller: "retrasadosWeb", action: "reporteRetrasadosConsolidado", params: [dpto: Persona.get(session.usuario.id).departamento.id, inicio: "1"])
-            } else {
-            }
-
+        def cn = dbConnectionService.getConnection()
+        def prms = []
+        def acciones = "'Orden de Compra', 'Confirmar', 'Productos', 'Navieras', 'Usuarios', 'Reportes'"
+        def tx = "select accndscr from prms, accn where prfl__id = " + Prfl.findByNombre(session.perfil.toString()).id +
+                " and accn.accn__id = prms.accn__id and accndscr in (${acciones})"
+        println "sql: $tx"
+        cn.eachRow(tx) { d ->
+            prms << d.accndscr
         }
-*/
-
-//        def fcha = new Date()
-//        def fa = new Date(fcha.time - 2*60*60*1000)
-//        def fb = new Date(fcha.time + 25*60*60*1000)
-//        println "fechas: fa: $fa, fb: $fb"
-//        def nada = diasLaborablesService.tmpoLaborableEntre(fa,fb)
+        cn.close()
+        println "--> $prms"
+        return [prms: prms]
 
     }
 

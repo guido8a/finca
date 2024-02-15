@@ -162,8 +162,9 @@
     </div>
 
     <div class="row mbr-justify-content-center">
-
-    <a href= "${createLink(controller:'orden', action: 'ordenDeCompra')}" style="text-decoration: none">
+        <g:if test="${prms.contains('Orden de Compra')}">
+            <a href="${createLink(controller: 'orden', action: 'ordenDeCompra')}" title="Órdenes de compra">
+        </g:if>
         <div class="col-lg-6 mbr-col-md-10">
             <div class="wrap">
                 <div style="width: 200px; height: 140px">
@@ -175,25 +176,32 @@
                 </div>
             </div>
         </div>
-    </a>
+        <g:if test="${prms.contains('Orden de Compra')}">
+            </a>
+        </g:if>
 
-    <a href= "${createLink(controller:'finca', action: 'list')}" style="text-decoration: none">
+        <g:if test="${prms.contains('Confirmar')}">
+            <a href="${createLink(controller: 'distribucion', action: 'confirma')}" title="Aporte de Fincas productoras">
+        </g:if>
         <div class="col-lg-6 mbr-col-md-10">
             <div class="wrap">
                 <div style="width: 200px; height: 140px">
-                    <asset:image src="apli/finca.png" title="Fincas productoras"  width="80%" height="80%"/>
+                    <asset:image src="apli/finca.png" title="Aporte de Fincas productoras"  width="80%" height="80%"/>
                 </div>
                 <div style="width: 450px; height: 120px">
                     <h2 class="mbr-fonts-style mbr-bold mbr-section-title3 display-5"><span>Fincas</span></h2>
-                    <p class="mbr-fonts-style text1 mbr-text display-6">Registro de fincas productoras y sus
-                        productos<br>
+                    <p class="mbr-fonts-style text1 mbr-text display-6">Registro de disponibilidad de productos desde las fincas productoras<br>
                     </p>
                 </div>
             </div>
         </div>
-    </a>
+        <g:if test="${prms.contains('Confirmar')}">
+            </a>
+        </g:if>
 
-        <a href= "${createLink(controller:'producto', action: 'list')}" style="text-decoration: none">
+        <g:if test="${prms.contains('Productos')}">
+            <a href="${createLink(controller: 'producto', action: 'list')}" title="Productos - frutas">
+        </g:if>
             <div class="col-lg-6 mbr-col-md-10">
                 <div class="wrap">
                     <div style="width: 200px; height: 140px">
@@ -206,9 +214,14 @@
                     </div>
                 </div>
             </div>
-        </a>
+        <g:if test="${prms.contains('Productos')}">
+            </a>
+        </g:if>
 
-        <a href= "${createLink(controller:'naviera', action: 'list')}" style="text-decoration: none">
+
+        <g:if test="${prms.contains('Navieras')}">
+            <a href="${createLink(controller: 'naviera', action: 'list')}" title="Navieras">
+        </g:if>
         <div class="col-lg-6 mbr-col-md-10">
             <div class="wrap">
                 <div style="width: 200px; height: 140px">
@@ -220,10 +233,13 @@
                 </div>
             </div>
         </div>
-    </a>
+        <g:if test="${prms.contains('Navieras')}">
+            </a>
+        </g:if>
 
-
-    <a href= "${createLink(controller:'persona', action: 'list')}" style="text-decoration: none">
+        <g:if test="${prms.contains('Usuarios')}">
+            <a href="${createLink(controller: 'persona', action: 'list')}" title="Administración de Usuarios">
+        </g:if>
         <div class="col-lg-6 mbr-col-md-10">
             <div class="wrap">
                 <div style="width: 200px; height: 140px">
@@ -236,9 +252,13 @@
                 </div>
             </div>
         </div>
-    </a>
+        <g:if test="${prms.contains('Usuarios')}">
+            </a>
+        </g:if>
 
-        <a href= "${createLink(controller:'reportes', action: 'reportes')}" style="text-decoration: none">
+        <g:if test="${prms.contains('Reportes')}">
+            <a href="${createLink(controller: 'reportes', action: 'reportes')}" title="Reportes">
+        </g:if>
             <div class="col-lg-6 mbr-col-md-10">
                 <div class="wrap">
                     <div style="width: 200px; height: 140px">
@@ -252,7 +272,9 @@
                     </div>
                 </div>
             </div>
-        </a>
+        <g:if test="${prms.contains('Reportes')}">
+            </a>
+        </g:if>
 
 
 
