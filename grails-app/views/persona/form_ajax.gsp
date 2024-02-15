@@ -75,9 +75,10 @@ option[selected]{
                         </label>
 
                         <div class="col-md-8">
-                            <div class="input-group input-group-sm"><span class="input-group-addon"><i class="fa fa-envelope"></i>
-                            </span><g:field type="email" name="mail" maxlength="63" class="form-control input-sm unique noEspacios" value="${personaInstance?.mail}"/>
-                            </div>
+%{--                            <div class="input-group input-group-sm"><span class="input-group-addon"><i class="fa fa-envelope"></i>--}%
+%{--                            </span><g:field type="email" name="mail" maxlength="63" class="form-control input-sm unique noEspacios" value="${personaInstance?.mail ?: ''}"/>--}%
+%{--                            </div>--}%
+                            <g:textField name="mail" maxlength="63" class="form-control input-sm unique email noEspacios"  value="${personaInstance?.mail ?: ''}" />
                         </div>
                     </span>
                 </div>
@@ -253,15 +254,13 @@ option[selected]{
             </div>
 
             <div class="form-group keeptogether ${hasErrors(bean: personaInstance, field: 'finca', 'error')}">
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <span class="grupo">
-                        <label for="finca" class="col-md-4 control-label">
+                        <label for="finca" class="col-md-2 control-label">
                             Finca
                         </label>
-                        <span class="col-md-8">
-                            <div class="input-group input-group-sm">
-%{--                               <g:select name="" from=""  --}%
-                            </div>
+                        <span class="col-md-10">
+                               <g:select name="finca" from="${finca.Finca.list([sort: 'nombre'])}" optionValue="nombre" optionKey="id" class="form-control" />
                         </span>
                     </span>
                 </div>
@@ -295,15 +294,15 @@ option[selected]{
                 label.remove();
             },
             rules         : {
-                mail : {
-                    remote: {
-                        url : "${createLink(action: 'validarMail_ajax')}",
-                        type: "post",
-                        data: {
-                            id: "${personaInstance?.id}"
-                        }
-                    }
-                },
+                %{--mail : {--}%
+                %{--    remote: {--}%
+                %{--        url : "${createLink(action: 'validarMail_ajax')}",--}%
+                %{--        type: "post",--}%
+                %{--        data: {--}%
+                %{--            id: "${personaInstance?.id}"--}%
+                %{--        }--}%
+                %{--    }--}%
+                %{--},--}%
                 login: {
                     remote: {
                         url : "${createLink(action: 'validarLogin_ajax')}",
@@ -315,9 +314,9 @@ option[selected]{
                 }
             },
             messages      : {
-                mail : {
-                    remote: "Ya existe Mail"
-                },
+                // mail : {
+                //     remote: "Ya existe Mail"
+                // },
                 login: {
                     remote: "Ya existe Login"
                 }
