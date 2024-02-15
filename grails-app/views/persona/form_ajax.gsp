@@ -262,7 +262,7 @@ option[selected]{
                             Finca
                         </label>
                         <span class="col-md-10">
-                               <g:select name="finca" from="${finca.Finca.list([sort: 'nombre'])}" optionValue="nombre" optionKey="id" class="form-control" />
+                               <g:select name="finca" from="${finca.Finca.list([sort: 'nombre'])}" optionValue="nombre" optionKey="id" class="form-control" value="${personaInstance?.finca?.id}" />
                         </span>
                     </span>
                 </div>
