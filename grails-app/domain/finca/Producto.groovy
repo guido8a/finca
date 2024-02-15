@@ -46,7 +46,7 @@ class Producto {
         }
     }
     static constraints = {
-        nombre(size: 3..65, blank: false, nullable: false)
+        nombre(size: 3..63, blank: false, nullable: false)
         descripcion(size: 0..255, blank: true, nullable: true)
         sku(size: 0..31, blank: true, nullable: true)
         calibre(blank: true, nullable: true)

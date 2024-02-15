@@ -26,35 +26,35 @@
             <g:set var="total" value="${0}" />
 
             <g:each in="${detalle}" status="i" var="dt">
-                <tr data-id="${dt.id}">
+                <tr data-id="${dt.dtor__id}">
                     %{--<td style="width: 20%">(${dt?.orden.semana?.numero}) ${dt?.orden?.semana?.fechaInicio?.format('dd-MM-yyyy')} - ${dt?.orden?.semana?.fechaFin?.format('dd-MM-yyyy')}</td>--}%
-                    <td style="width: 6%">${dt?.orden?.semana?.numero}</td>
-                    <td style="width: 26%; text-align: left">${dt?.producto?.nombre}</td>
-                    <td style="width: 6%">${dt?.producto?.size}</td>
-                    <td style="width: 6%">${dt?.producto?.unindadesCaja}</td>
-                    <td style="width: 6%">${dt?.producto?.peso}</td>
-                    <td style="width: 6%">${dt?.producto?.empaque}</td>
-                    <td style="width: 6%">${dt?.producto?.marca}</td>
-                    <td style="width: 8%; text-align: left">${dt?.cantidad}</td>
-                    <td style="width: 8%; text-align: left">${dt?.cantidad}</td>
-                    <td style="width: 6%">${dt?.cantidad}</td>
-                    <td style="width: 6%">${dt?.cantidad}</td>
+                    <td style="width: 6%">${dt?.smnanmro}</td>
+                    <td style="width: 26%; text-align: left">${dt?.prodnmbr}</td>
+                    <td style="width: 6%">${dt?.prodsize}</td>
+                    <td style="width: 6%">${dt?.produnbx}</td>
+                    <td style="width: 6%">${dt?.prodpeso}</td>
+                    <td style="width: 6%">${dt?.prodpack}</td>
+                    <td style="width: 6%">${dt?.prodbrnd}</td>
+                    <td style="width: 8%; text-align: left">${dt?.dtorcntd}</td>
+                    <td style="width: 8%; text-align: left">${dt?.dtorestd}</td>
+                    <td style="width: 6%">${dt?.dtordiff}</td>
+                    <td style="width: 6%">${dt?.dtortotl}</td>
                     <td style="width: 10%">
-                        <a href="#" class="btn btn-success btn-xs btnEditarOrden" title="Editar" data-id="${dt.id}"
-                           data-prod="${dt?.producto?.id}" data-cntd="${dt?.cantidad}" data-fam="${dt?.producto?.familia?.id}">
+                        <a href="#" class="btn btn-success btn-xs btnEditarOrden" title="Editar" data-id="${dt.dtor__id}"
+                           data-prod="${dt?.prod__id}" data-cntd="${dt?.dtorcntd}" data-fam="${dt?.faml__id}">
                             <i class="fa fa-edit"></i>
                         </a>
-                        <a href="#" class="btn btn-danger btn-xs btnBorrarOrden" data-id="${dt.id}"
-                           data-producto="${dt?.producto?.nombre}" title="Borrar">
+                        <a href="#" class="btn btn-danger btn-xs btnBorrarOrden" data-id="${dt.dtor__id}"
+                           data-producto="${dt?.prodnmbr}" title="Borrar">
                             <i class="fa fa-trash"></i>
                         </a>
-                        <a href="#" class="btn btn-info btn-xs btnDistribucion" data-id="${dt.id}" title="Distribuir a fincas">
+                        <a href="#" class="btn btn-info btn-xs btnDistribucion" data-id="${dt.dtor__id}" title="Distribuir a fincas">
                             <i class="fa fa-random"></i>
                         </a>
                     </td>
                 </tr>
 
-                <g:set var="total" value="${total += (dt.cantidad ?: 0)}" />
+                <g:set var="total" value="${total += (dt.dtorcntd ?: 0)}" />
 
             </g:each>
 

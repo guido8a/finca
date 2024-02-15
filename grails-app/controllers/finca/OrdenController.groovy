@@ -2,6 +2,8 @@ package finca
 
 class OrdenController {
 
+    def dbConnectionService
+
     def list(){
         def orden = Orden.list().sort{it.numero}
         return[orden: orden]
@@ -76,6 +78,7 @@ class OrdenController {
 
     def tablaOrden_ajax(){
         println "tablaOrdn: ${params}"
+        def cn = dbConnectionService.getConnection()
         def smna = Semana.get(params.smna)
         def ordn = Orden.findAllBySemana(smna)
         def detalle
@@ -83,9 +86,10 @@ class OrdenController {
         if(ordn.size() > 1) {
             flash.message("Error")
         } else {
-            detalle = DetalleOrden.findAllByOrden(ordn, [sort: 'producto.nombre'])
+//            detalle = DetalleOrden.findAllByOrden(ordn, [sort: 'producto.nombre'])
+            detalle = cn.rows("select * from orden(1,1)".toString())
         }
-
+        println "--> $detalle"
         return [detalle: detalle, ordn: ordn, smna: smna]
     }
 
