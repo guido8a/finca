@@ -108,6 +108,15 @@ class DistribucionController {
         if(detalleFincas){
             detalleFincas.estimado = params.cantidad.toInteger()
             detalleFincas.diferencia = params.cantidad.toInteger() -  detalleFincas.cantidad
+
+            if(!detalleFincas.save(flush:true)){
+                println("Error al guardar el estimado")
+                render "no_Error al guardar el estimado"
+            }else{
+                render "ok_Guardado correctamente"
+            }
+
+
         }else{
             render "no_Error al guardar la cantidad"
         }

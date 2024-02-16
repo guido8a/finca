@@ -33,7 +33,7 @@
     </div>
     <div class="col-md-4">
         <div class="col-md-3 show-label">
-            Cantidad:
+            Estimado:
         </div>
         <div class="col-md-6">
             <span>
