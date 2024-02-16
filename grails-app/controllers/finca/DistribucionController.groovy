@@ -63,7 +63,7 @@ class DistribucionController {
     }
 
     def tablaFinca_ajax(){
-        println "tablaFinca: ${params}"
+//        println "tablaFinca: ${params}"
         def cn = dbConnectionService.getConnection()
         def smna = Semana.get(params.smna)
         def ordn = Orden.findAllBySemana(smna)
@@ -71,11 +71,11 @@ class DistribucionController {
         def sql = ""
         def detalle = []
 
-        println "ordn: ${ordn.size()}"
+//        println "ordn: ${ordn.size()}"
         if(ordn.size() > 1) {
             flash.message("Error")
         } else if(ordn.size() == 1){
-            sql = "select * from fincas(1, ${ordn[0]?.semana.id}, ${usro?.finca?.id})"
+            sql = "select * from fincas(1, ${ordn[0]?.semana?.id}, ${usro?.finca?.id})"
             println "sql. $sql"
             detalle = cn.rows(sql.toString())
         }
@@ -89,6 +89,28 @@ class DistribucionController {
         println "usuario: $usro"
 
         [usro: usro]
+    }
+
+    def confirmar_ajax(){
+        def detalle = DetalleFinca.get(params.id)
+        return [detalle: detalle]
+    }
+
+    def estimadoConfirmar_ajax(){
+        def detalleFincas = DetalleFinca.get(params.id)
+        def diferencia = detalleFincas.estimado -  detalleFincas.cantidad
+        return[detalle: detalleFincas, diferencia: diferencia]
+    }
+
+    def saveConfirmar_ajax() {
+        def detalleFincas = DetalleFinca.get(params.id)
+
+        if(detalleFincas){
+            detalleFincas.estimado = params.cantidad.toInteger()
+            detalleFincas.diferencia = params.cantidad.toInteger() -  detalleFincas.cantidad
+        }else{
+            render "no_Error al guardar la cantidad"
+        }
     }
 
 

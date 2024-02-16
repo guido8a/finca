@@ -90,7 +90,7 @@ class OrdenController {
         } else if(ordn.size() == 1){
 //            sql = "select * from orden(${ordn[0].cliente.id}, ${ordn[0].semana.id})"
             sql = "select * from orden(1, ${ordn[0]?.semana.id})"
-//            println "sql. $sql"
+            println "sql. $sql"
             detalle = cn.rows(sql.toString())
         }
 
@@ -170,6 +170,7 @@ class OrdenController {
         detalle.detalleOrden = dtor
         detalle.finca = finca
         detalle.cantidad = params.cantidad.toInteger()
+        detalle.diferencia = (detalle?.estimado ?: 0) - params.cantidad.toInteger()
 
         if(!detalle.save(flush: true)){
             println("Error al guardar " + detalle.errors)

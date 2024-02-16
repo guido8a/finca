@@ -27,7 +27,6 @@
 
             <g:each in="${detalle}" status="i" var="dt">
                 <tr data-id="${dt.dtor__id}">
-                    %{--<td style="width: 20%">(${dt?.orden.semana?.numero}) ${dt?.orden?.semana?.fechaInicio?.format('dd-MM-yyyy')} - ${dt?.orden?.semana?.fechaFin?.format('dd-MM-yyyy')}</td>--}%
                     <td style="width: 6%">${dt?.smnanmro}</td>
                     <td style="width: 26%; text-align: left">${dt?.prodnmbr}</td>
                     <td style="width: 6%">${dt?.prodsize}</td>
@@ -39,17 +38,10 @@
                     <td style="width: 8%; text-align: left">${dt?.dtorestd}</td>
                     <td style="width: 6%">${dt?.dtordiff}</td>
                     <td style="width: 6%">${dt?.dtortotl}</td>
-                    <td style="width: 10%">
-                        <a href="#" class="btn btn-success btn-xs btnEditarOrden" title="Editar" data-id="${dt.dtor__id}"
-                           data-prod="${dt?.prod__id}" data-cntd="${dt?.dtorcntd}" data-fam="${dt?.faml__id}">
-                            <i class="fa fa-edit"></i>
-                        </a>
-                        <a href="#" class="btn btn-danger btn-xs btnBorrarOrden" data-id="${dt.dtor__id}"
-                           data-producto="${dt?.prodnmbr}" title="Borrar">
-                            <i class="fa fa-trash"></i>
-                        </a>
-                        <a href="#" class="btn btn-info btn-xs btnDistribucion" data-id="${dt.dtor__id}" title="Distribuir a fincas">
-                            <i class="fa fa-random"></i>
+                    <td style="width: 10%; text-align: center">
+                        <a href="#" class="btn btn-success btn-xs btnConfirmarOrden" title="Confirmar" data-id="${dt.dtor__id}"
+                           data-prod="${dt?.prod__id}" data-cntd="${dt?.dtorcntd}" data-fam="${dt?.faml__id}" data-dsfn="${dt?.dsfn__id}">
+                            <i class="fa fa-check"></i>
                         </a>
                     </td>
                 </tr>
@@ -73,12 +65,12 @@
 
 <script type="text/javascript">
 
-    $(".btnDistribucion").click(function () {
-        var title = "Distribución por Finca";
-        var id = $(this).data("id");
+    $(".btnConfirmarOrden").click(function () {
+        var title = "Confirmación";
+        var id = $(this).data("dsfn");
         $.ajax({
             type: "POST",
-            url: "${createLink(controller: 'orden', action:'distribuir_ajax')}",
+            url: "${createLink(controller: 'distribucion', action:'confirmar_ajax')}",
             data: {id: id},
             success: function (msg) {
                 var b = bootbox.dialog({
