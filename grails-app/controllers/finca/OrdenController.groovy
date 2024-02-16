@@ -137,48 +137,49 @@ class OrdenController {
         return[detalles: detallesFincas]
     }
 
-//    def saveDistribuir_ajax(){
-//        def dtor = DetalleOrden.get(params.id)
-//        def finca = Finca.get(params.finca)
-//        def detallesFincas = DetalleFinca.findAllByDetalleOrden(dtor)
-//        def estimado = detallesFincas.size() > 0 ? detallesFincas*.cantidad.sum() : 0
-//        def diferencia= dtor.cantidad - estimado?.toInteger()
-//
-//        if(params.cantidad.toInteger() > diferencia){
-//            render "no_La cantidad ingresada es mayor a la diferencia disponible"
-//            return true
-//        }else{
-//            def detalle = new DetalleFinca()
-//            detalle.detalleOrden = dtor
-//            detalle.finca = finca
-//            detalle.cantidad = params.cantidad.toInteger()
-//
-//            if(!detalle.save(flush: true)){
-//                println("Error al guardar " + detalle.errors)
-//                render "no_Error al guardar"
-//            }else{
-//                render "ok_Guardado correctamente"
-//            }
-//        }
-//    }
-
     def saveDistribuir_ajax(){
         def dtor = DetalleOrden.get(params.id)
         def finca = Finca.get(params.finca)
+        def detallesFincas = DetalleFinca.findAllByDetalleOrden(dtor)
+        def estimado = detallesFincas.size() > 0 ? detallesFincas*.cantidad.sum() : 0
+        def diferencia= dtor.cantidad - estimado?.toInteger()
 
-        def detalle = new DetalleFinca()
-        detalle.detalleOrden = dtor
-        detalle.finca = finca
-        detalle.cantidad = params.cantidad.toInteger()
-        detalle.diferencia = (detalle?.estimado ?: 0) - params.cantidad.toInteger()
-
-        if(!detalle.save(flush: true)){
-            println("Error al guardar " + detalle.errors)
-            render "no_Error al guardar"
+        if(params.cantidad.toInteger() > diferencia){
+            render "no_La cantidad ingresada es mayor a la diferencia disponible"
+            return true
         }else{
-            render "ok_Guardado correctamente"
+            def detalle = new DetalleFinca()
+            detalle.detalleOrden = dtor
+            detalle.finca = finca
+            detalle.cantidad = params.cantidad.toInteger()
+            detalle.diferencia = (detalle?.estimado ?: 0) - params.cantidad.toInteger()
+
+            if(!detalle.save(flush: true)){
+                println("Error al guardar " + detalle.errors)
+                render "no_Error al guardar"
+            }else{
+                render "ok_Guardado correctamente"
+            }
         }
     }
+
+//    def saveDistribuir_ajax(){
+//        def dtor = DetalleOrden.get(params.id)
+//        def finca = Finca.get(params.finca)
+//
+//        def detalle = new DetalleFinca()
+//        detalle.detalleOrden = dtor
+//        detalle.finca = finca
+//        detalle.cantidad = params.cantidad.toInteger()
+//        detalle.diferencia = (detalle?.estimado ?: 0) - params.cantidad.toInteger()
+//
+//        if(!detalle.save(flush: true)){
+//            println("Error al guardar " + detalle.errors)
+//            render "no_Error al guardar"
+//        }else{
+//            render "ok_Guardado correctamente"
+//        }
+//    }
 
     def borrarDistribuir_ajax(){
         def detalle = DetalleFinca.get(params.id)
