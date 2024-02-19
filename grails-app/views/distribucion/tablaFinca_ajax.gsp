@@ -39,11 +39,15 @@
                     <td style="width: 6%">${dt?.dtordiff}</td>
                     <td style="width: 6%">${dt?.dtortotl}</td>
                     <td style="width: 10%; text-align: center">
-                        <a href="#" class="btn btn-success btn-xs btnConfirmarOrden" title="Confirmar" data-id="${dt.dtor__id}"
-                           data-prod="${dt?.prod__id}" data-cntd="${dt?.dtorcntd}" data-fam="${dt?.faml__id}" data-dsfn="${dt?.dsfn__id}">
-                            %{--<i class="fa fa-check-square"></i>--}%
-                            <i class="fa fa-check-circle"></i>
-                        </a>
+                        <g:if test="${finca.DetalleOrden.get(dt.dtor__id)?.estado != '1'}">
+                            <a href="#" class="btn btn-success btn-xs btnConfirmarOrden" title="Confirmar" data-id="${dt.dtor__id}"
+                               data-prod="${dt?.prod__id}" data-cntd="${dt?.dtorcntd}" data-fam="${dt?.faml__id}" data-dsfn="${dt?.dsfn__id}">
+                                <i class="fa fa-check-circle"></i>
+                            </a>
+                        </g:if>
+                        <g:else>
+                            <span title="Orden ya se encuentra registrada"><i class="fa fa-exclamation-triangle text-danger fa-1x"></i>Registrada</span>
+                        </g:else>
                     </td>
                 </tr>
 

@@ -35,33 +35,39 @@ class OrdenController {
         def orden = Orden.findBySemana(smna)
         def dtor = DetalleOrden.findByOrdenAndProducto(orden, prod) //hacer get con ID
 
-        if(!orden){
-            orden = new Orden()
-            orden.semana = smna
-            orden.cliente = Cliente.get(1)
-            orden.estado = 'I'
-        }
+        if(dtor.estado != '1'){
+            if(!orden){
+                orden = new Orden()
+                orden.semana = smna
+                orden.cliente = Cliente.get(1)
+                orden.estado = 'I'
+            }
 
-        try {
-            orden.save(flush: true)
-        } catch (e) {
-            println("error al crear la orden " + orden.errors)
-        }
+            try {
+                orden.save(flush: true)
+            } catch (e) {
+                println("error al crear la orden " + orden.errors)
+            }
 
-        if(!dtor){
-            dtor = new DetalleOrden()
-        }
+            if(!dtor){
+                dtor = new DetalleOrden()
+            }
 
-        dtor.orden = orden
-        dtor.producto = Producto.get( params.prod.toInteger() )
-        dtor.cantidad = params.cntd.toInteger()
+            dtor.orden = orden
+            dtor.producto = Producto.get( params.prod.toInteger() )
+            dtor.cantidad = params.cntd.toInteger()
 
-        if(!dtor.save(flush:true)){
-            println("error al guardar el detalle de la orden " + dtor.errors)
-            render "no"
+            if(!dtor.save(flush:true)){
+                println("error al guardar el detalle de la orden " + dtor.errors)
+                render "no"
+            }else{
+                render "ok_Producto actualizado exitosamente"
+            }
         }else{
-            render "ok_Producto actualizado exitosamente"
+            render "no_La orden ya se encuentra registrada"
         }
+
+
     }
 
     def borrarProducto_ajax(){
