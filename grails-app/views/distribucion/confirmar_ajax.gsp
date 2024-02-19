@@ -5,7 +5,7 @@
     <div class="col-md-2">
         <span >${detalle?.detalleOrden?.orden?.semana?.numero}</span>
     </div>
-    <div class="col-md-1 show-label">
+    <div class="col-md-2 show-label">
         Producto:
     </div>
     <div class="col-md-4">

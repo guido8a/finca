@@ -41,7 +41,8 @@
                     <td style="width: 10%; text-align: center">
                         <a href="#" class="btn btn-success btn-xs btnConfirmarOrden" title="Confirmar" data-id="${dt.dtor__id}"
                            data-prod="${dt?.prod__id}" data-cntd="${dt?.dtorcntd}" data-fam="${dt?.faml__id}" data-dsfn="${dt?.dsfn__id}">
-                            <i class="fa fa-check"></i>
+                            %{--<i class="fa fa-check-square"></i>--}%
+                            <i class="fa fa-check-circle"></i>
                         </a>
                     </td>
                 </tr>
