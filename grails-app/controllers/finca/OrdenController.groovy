@@ -35,7 +35,7 @@ class OrdenController {
         def orden = Orden.findBySemana(smna)
         def dtor = DetalleOrden.findByOrdenAndProducto(orden, prod) //hacer get con ID
 
-        if(dtor.estado != '1'){
+        if(dtor?.estado != '1'){
             if(!orden){
                 orden = new Orden()
                 orden.semana = smna
