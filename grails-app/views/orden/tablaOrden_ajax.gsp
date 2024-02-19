@@ -26,10 +26,10 @@
             <g:set var="total" value="${0}" />
 
             <g:each in="${detalle}" status="i" var="dt">
-                <tr data-id="${dt.dtor__id}">
+                <tr data-id="${dt.dtor__id}" class="${dt?.dtoretdo == '1' ? 'registrado' : ''}">
                     %{--<td style="width: 20%">(${dt?.orden.semana?.numero}) ${dt?.orden?.semana?.fechaInicio?.format('dd-MM-yyyy')} - ${dt?.orden?.semana?.fechaFin?.format('dd-MM-yyyy')}</td>--}%
                     <td style="width: 6%">${dt?.smnanmro}</td>
-                    <td style="width: 25%; text-align: left">${dt?.prodnmbr}</td>
+                    <td style="width: 25%; text-align: left">${dt?.prodnmbr} ${dt?.dtoretdo}</td>
                     <td style="width: 6%">${dt?.prodsize}</td>
                     <td style="width: 6%">${dt?.produnbx}</td>
                     <td style="width: 6%">${dt?.prodpeso}</td>
@@ -57,7 +57,7 @@
                             </a>
                         </g:if>
                         <g:else>
-                            <a href="#" class="btn btn-danger btn-xs btnRegistrar" data-id="${dt.dtor__id}" data-et="no" title="Quitar registro">
+                            <a href="#" class="btn btn-info btn-xs btnRegistrar" data-id="${dt.dtor__id}" data-et="no" title="Quitar registro">
                                 <i class="fa fa-lock"></i>
                             </a>
                         </g:else>

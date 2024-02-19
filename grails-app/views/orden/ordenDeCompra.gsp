@@ -14,6 +14,10 @@
         margin-top: 15px;
         text-align: center;
     }
+    .registrado {
+        font-weight: bold;
+        color: #405c8d;
+    }
     </style>
 
 </head>
