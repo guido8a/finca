@@ -197,4 +197,18 @@ class OrdenController {
         }
     }
 
+    def registrarOrden_ajax() {
+        def orden = DetalleOrden.get(params.id)
+        if(orden){
+            orden.estado = (orden.estado == '1' ? (orden.estado = '0') : (orden.estado = '1'))
+            if(!orden.save(flush:true)){
+                render "no_Error al registrar"
+            }else{
+                render "ok_Guardado correctamente"
+            }
+        }else{
+            render "no_Error al registrar"
+        }
+    }
+
 }

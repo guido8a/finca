@@ -3,7 +3,7 @@
         <thead>
         <tr>
             <th style="width: 6%">Semana</th>
-            <th style="width: 26%">Producto</th>
+            <th style="width: 25%">Producto</th>
             <th style="width: 6%">Size</th>
             <th style="width: 6%">Units</th>
             <th style="width: 6%">Weight</th>
@@ -13,7 +13,7 @@
             <th style="width: 8%">Estimated</th>
             <th style="width: 6%">Difference</th>
             <th style="width: 6%">Total</th>
-            <th style="width: 10%">Acciones</th>
+            <th style="width: 11%">Acciones</th>
         </tr>
         </thead>
     </table>
@@ -29,7 +29,7 @@
                 <tr data-id="${dt.dtor__id}">
                     %{--<td style="width: 20%">(${dt?.orden.semana?.numero}) ${dt?.orden?.semana?.fechaInicio?.format('dd-MM-yyyy')} - ${dt?.orden?.semana?.fechaFin?.format('dd-MM-yyyy')}</td>--}%
                     <td style="width: 6%">${dt?.smnanmro}</td>
-                    <td style="width: 26%; text-align: left">${dt?.prodnmbr}</td>
+                    <td style="width: 25%; text-align: left">${dt?.prodnmbr}</td>
                     <td style="width: 6%">${dt?.prodsize}</td>
                     <td style="width: 6%">${dt?.produnbx}</td>
                     <td style="width: 6%">${dt?.prodpeso}</td>
@@ -39,21 +39,28 @@
                     <td style="width: 8%; text-align: left">${dt?.dtorestd}</td>
                     <td style="width: 6%">${dt?.dtordiff}</td>
                     <td style="width: 6%">${dt?.dtortotl}</td>
-                    <td style="width: 10%">
-                        <a href="#" class="btn btn-success btn-xs btnEditarOrden" title="Editar" data-id="${dt.dtor__id}"
-                           data-prod="${dt?.prod__id}" data-cntd="${dt?.dtorcntd}" data-fam="${dt?.faml__id}">
-                            <i class="fa fa-edit"></i>
-                        </a>
-                        <a href="#" class="btn btn-danger btn-xs btnBorrarOrden" data-id="${dt.dtor__id}"
-                           data-producto="${dt?.prodnmbr}" title="Borrar">
-                            <i class="fa fa-trash"></i>
-                        </a>
-                        <a href="#" class="btn btn-info btn-xs btnDistribucion" data-id="${dt.dtor__id}" title="Distribuir a fincas">
-                            <i class="fa fa-random"></i>
-                        </a>
-                        <a href="#" class="btn btn-warning btn-xs btnRegistrar" data-id="${dt.dtor__id}" title="Registrar">
-                            <i class="fa fa-repeat"></i>
-                        </a>
+                    <td style="width: 11%">
+                        <g:if test="${finca.DetalleOrden.get(dt?.dtor__id)?.estado != '1'}">
+                            <a href="#" class="btn btn-success btn-xs btnEditarOrden" title="Editar" data-id="${dt.dtor__id}"
+                               data-prod="${dt?.prod__id}" data-cntd="${dt?.dtorcntd}" data-fam="${dt?.faml__id}">
+                                <i class="fa fa-edit"></i>
+                            </a>
+                            <a href="#" class="btn btn-danger btn-xs btnBorrarOrden" data-id="${dt.dtor__id}"
+                               data-producto="${dt?.prodnmbr}" title="Borrar">
+                                <i class="fa fa-trash"></i>
+                            </a>
+                            <a href="#" class="btn btn-info btn-xs btnDistribucion" data-id="${dt.dtor__id}" title="Distribuir a fincas">
+                                <i class="fa fa-random"></i>
+                            </a>
+                            <a href="#" class="btn btn-warning btn-xs btnRegistrar" data-id="${dt.dtor__id}" data-et="si" title="Registrar">
+                                <i class="fa fa-lock"></i>
+                            </a>
+                        </g:if>
+                        <g:else>
+                            <a href="#" class="btn btn-success btn-xs btnRegistrar" data-id="${dt.dtor__id}" data-et="no" title="Quitar registro">
+                                <i class="fa fa-lock"></i>
+                            </a>
+                        </g:else>
                     </td>
                 </tr>
 
@@ -75,6 +82,49 @@
 </div>
 
 <script type="text/javascript">
+
+
+    $(".btnRegistrar").click(function () {
+        var id = $(this).data("id");
+        var et = $(this).data("et") === 'no' ? ' quitar el registro de ' : ' registrar ';
+
+        bootbox.confirm({
+            title: "Registro",
+            message: '<i class="fa fa-exclamation-triangle text-info fa-3x"></i> <span style="font-size: 14px; font-weight: bold">Está seguro de' + et + 'esta orden de compra? </span> ',
+            buttons: {
+                cancel: {
+                    label: '<i class="fa fa-times"></i> Cancelar',
+                    className: 'btn-primary'
+                },
+                confirm: {
+                    label: '<i class="fa fa-lock"></i> Aceptar',
+                    className: 'btn-success'
+                }
+            },
+            callback: function (result) {
+                if(result){
+                    $.ajax({
+                        type: 'POST',
+                        url: '${createLink(controller: 'orden', action: 'registrarOrden_ajax')}',
+                        data:{
+                            id: id
+                        },
+                        success: function (msg) {
+                            var parts = msg.split("_");
+                            if(parts[0] === 'ok'){
+                                log(parts[1],"success");
+                                cargarTablaOrden();
+                            }else{
+                                bootbox.alert('<i class="fa fa-exclamation-triangle text-danger fa-3x"></i> ' + '<strong style="font-size: 14px">' + parts[1] + '</strong>');
+                                return false;
+                            }
+                        }
+                    })
+                }
+            }
+        });
+    });
+
 
     $(".btnDistribucion").click(function () {
         var title = "Distribución por Finca";
@@ -106,17 +156,17 @@
     // cargarTotales();
 
     %{--function cargarTotales(){--}%
-        %{--var total = '${total}';--}%
-        %{--$.ajax({--}%
-           %{--type: 'POST',--}%
-           %{--url: '${createLink(controller: 'programa', action: 'tablaTotales_ajax')}',--}%
-           %{--data:{--}%
-               %{--total:total--}%
-           %{--},--}%
-           %{--success:function (msg) {--}%
-               %{--$("#divTotales").html(msg)--}%
-           %{--} --}%
-        %{--});--}%
+    %{--var total = '${total}';--}%
+    %{--$.ajax({--}%
+    %{--type: 'POST',--}%
+    %{--url: '${createLink(controller: 'programa', action: 'tablaTotales_ajax')}',--}%
+    %{--data:{--}%
+    %{--total:total--}%
+    %{--},--}%
+    %{--success:function (msg) {--}%
+    %{--$("#divTotales").html(msg)--}%
+    %{--} --}%
+    %{--});--}%
     %{--}--}%
 
     $(".btnEditarOrden").click(function () {
