@@ -37,7 +37,7 @@
         </div>
         <div class="col-md-6">
             <span>
-                <g:textField name="cantidadDistribuir" class="form-control" />
+                <g:textField name="cantidadDistribuir" class="form-control" value="${detalle?.estimado ?: ''}"/>
             </span>
         </div>
     </div>

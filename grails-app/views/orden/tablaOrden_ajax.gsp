@@ -51,6 +51,9 @@
                         <a href="#" class="btn btn-info btn-xs btnDistribucion" data-id="${dt.dtor__id}" title="Distribuir a fincas">
                             <i class="fa fa-random"></i>
                         </a>
+                        <a href="#" class="btn btn-warning btn-xs btnRegistrar" data-id="${dt.dtor__id}" title="Registrar">
+                            <i class="fa fa-repeat"></i>
+                        </a>
                     </td>
                 </tr>
 

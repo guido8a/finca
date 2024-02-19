@@ -5,6 +5,7 @@ class DetalleOrden {
     Orden orden
     Producto producto
     int cantidad
+    String estado
 
     static auditable = true
 
@@ -19,6 +20,7 @@ class DetalleOrden {
             orden column: 'ordn__id'
             producto column: 'prod__id'
             cantidad column: 'dtorcntd'
+            estado column: 'dtoretdo'
 
         }
     }
@@ -26,6 +28,7 @@ class DetalleOrden {
         orden(blank: false, nullable: false)
         producto(blank: false, nullable: false)
         cantidad(blank: false, nullable: false)
+        estado(blank: true, nullable: true)
     }
 
 }
