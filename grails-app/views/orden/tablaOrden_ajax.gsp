@@ -57,7 +57,7 @@
                             </a>
                         </g:if>
                         <g:else>
-                            <a href="#" class="btn btn-success btn-xs btnRegistrar" data-id="${dt.dtor__id}" data-et="no" title="Quitar registro">
+                            <a href="#" class="btn btn-danger btn-xs btnRegistrar" data-id="${dt.dtor__id}" data-et="no" title="Quitar registro">
                                 <i class="fa fa-lock"></i>
                             </a>
                         </g:else>
