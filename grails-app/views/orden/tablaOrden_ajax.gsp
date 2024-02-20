@@ -1,3 +1,4 @@
+<%@ page import="finca.DetalleOrden" %>
 <div role="main" style="margin-top: 10px;">
     <table class="table table-bordered table-striped table-condensed table-hover">
         <thead>
@@ -72,9 +73,6 @@
                                 </tbody>
                             </table>
                         </a>
-%{--                        <span class="btn-group pull-right">--}%
-%{--          --}%
-%{--                        </span>--}%
                     </h4>
                 </div>
 
@@ -82,56 +80,44 @@
                     <table class="table table-bordered table-condensed table-hover">
                         <thead>
                         <tr style="width: 100%">
-                            <th style="width: 6%">Semana</th>
-                            <th style="width: 25%">Producto</th>
-                            <th style="width: 6%">Size</th>
-                            <th style="width: 6%">Units</th>
-                            <th style="width: 6%">Weight</th>
-                            <th style="width: 6%">Packing</th>
-                            <th style="width: 6%">Brand</th>
-                            <th style="width: 8%">Order</th>
-                            <th style="width: 8%">Estimated</th>
-                            <th style="width: 6%">Difference</th>
-                            <th style="width: 6%">Total</th>
-                            <th style="width: 11%">Acciones</th>
+                            <th style="width: 14%">Finca</th>
+                            <th style="width: 14%">Producto</th>
+                            <th style="width: 8%">Size</th>
+                            <th style="width: 8%">Units</th>
+                            <th style="width: 8%">Weight</th>
+                            <th style="width: 8%">Packing</th>
+                            <th style="width: 8%">Brand</th>
+                            <th style="width: 8%">Cantidad</th>
+                            <th style="width: 8%">Estimado</th>
+                            <th style="width: 8%">Diferencia</th>
                         </tr>
                         </thead>
-                        %{--                    <tbody>--}%
-                        %{--                    <g:set var="total" value="${0}"/>--}%
-                        %{--                    <g:each in="${MarcoLogico.findAllByMarcoLogicoAndEstado(comp, 0, [sort: 'numero'])}" var="act" status="l">--}%
-                        %{--                        <g:set var="total" value="${total.toDouble() + act.monto}"/>--}%
-                        %{--                        <tr data-id="${act.id}" data-show="${k + 1}" data-info="${act.objeto}">--}%
-                        %{--                            <td class="text-center">${act.numero}</td>--}%
-                        %{--                            <td>${act?.objeto}</td>--}%
-                        %{--                            <td class="text-right"><g:formatNumber number="${act.monto}" type="currency" currencySymbol=""/></td>--}%
-                        %{--                            <g:if test="${editable}">--}%
-                        %{--                                <td style="text-align: center">--}%
-                        %{--                                    <div class="btn-group ">--}%
-                        %{--                                        <a href="#" class="btn btn-xs btn-info btnEditAct" title="Editar actividad"--}%
-                        %{--                                           data-id="${act.id}" data-show="${k}" data-com="${act?.marcoLogico?.id}">--}%
-                        %{--                                            <i class="fa fa-edit"></i>--}%
-                        %{--                                        </a>--}%
-                        %{--                                        <a href="#" class="btn btn-xs btn-danger btnDeleteAct" title="Eliminar actividad"--}%
-                        %{--                                           data-id="${act.id}" data-show="${k}" data-info="${act.objeto}">--}%
-                        %{--                                            <i class="fa fa-trash"></i>--}%
-                        %{--                                        </a>--}%
-                        %{--                                        <a href="#" class="btn btn-xs btn-warning btnCronoAct" title="Cronograma"--}%
-                        %{--                                           data-id="${act.id}" data-show="${k}">--}%
-                        %{--                                            <i class="fa fa-calendar"></i>--}%
-                        %{--                                        </a>--}%
-                        %{--                                    </div>--}%
-                        %{--                                </td>--}%
-                        %{--                            </g:if>--}%
-                        %{--                        </tr>--}%
-                        %{--                    </g:each>--}%
-                        %{--                    </tbody>--}%
-                        %{--                    <tfoot>--}%
-                        %{--                    <tr>--}%
-                        %{--                        <th colspan="2">Subtotal</th>--}%
-                        %{--                        <th class="text-right"><g:formatNumber number="${total}" type="currency" currencySymbol=""/></th>--}%
-                        %{--                    </tr>--}%
-                        %{--                    </tfoot>--}%
-                        %{--                    <g:set var="tc" value="${tc.toDouble() + total}"/>--}%
+                        <tbody>
+                        <g:set var="dist" value="${finca.DetalleFinca.findAllByDetalleOrden(finca.DetalleOrden.get(dt?.dtor__id))}"/>
+                        <g:if test="${dist.size() > 0}">
+                            <g:each in="${dist}" var="detalle">
+                                <tr>
+                                    <td style="width: 14%">${detalle?.finca?.nombre}</td>
+                                    <td style="width: 14%">${detalle?.detalleOrden?.producto?.nombre}</td>
+                                    <td style="width: 8%">${detalle?.detalleOrden?.producto?.size}</td>
+                                    <td style="width: 8%">${detalle?.detalleOrden?.producto?.unindadesCaja}</td>
+                                    <td style="width: 8%">${detalle?.detalleOrden?.producto?.peso}</td>
+                                    <td style="width: 8%">${detalle?.detalleOrden?.producto?.empaque}</td>
+                                    <td style="width: 8%">${detalle?.detalleOrden?.producto?.marca}</td>
+                                    <td style="width: 8%">${detalle?.cantidad}</td>
+                                    <td style="width: 8%">${detalle?.estimado}</td>
+                                    <td style="width: 8%">${detalle?.diferencia}</td>
+                                </tr>
+                            </g:each>
+                        </g:if>
+                        <g:else>
+                            <tr>
+                                <td class="text-center" colspan="10">
+                                    <i class="fa fa-exclamation-triangle text-info fa-3x"></i> <strong style="font-size: 14px"> No se encontraron registros que mostrar </strong>
+                                </td>
+                            </tr>
+                        </g:else>
+                        </tbody>
                     </table>
                 </div>
             </div>
