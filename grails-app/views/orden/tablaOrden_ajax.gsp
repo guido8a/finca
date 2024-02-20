@@ -26,7 +26,7 @@
             <g:set var="total" value="${0}" />
         %{--            <g:set var="compInfo" value="Componente ${comp.numero ?: 's/n'}:--}%
         %{--                                ${(comp?.objeto?.size() > 40) ? comp?.objeto?.substring(0, 40) + "..." : comp.objeto}"/>--}%
-            <div class="panel panel-success">
+            <div class="panel">
                 <div class="panel-heading" role="tab" id="headingComp${k + 1}">
                     <h4 class="panel-title" data-toggle="collapse" data-parent="#accordion" href="#componente${k + 1}"
                     %{--                        aria-expanded="${k + 1 == params.show.toInteger() ? 'true' : 'false'}" aria-controls="componente${k + 1}">--}%
