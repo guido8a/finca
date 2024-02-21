@@ -25,9 +25,11 @@
         <g:each in="${detalle}" var="dt" status="k">
             <g:set var="total" value="${0}" />
             <div class="panel">
-                <div class="panel-heading" role="tab" id="headingComp${k + 1}">
+                %{--<div class="panel-heading" role="tab" id="headingComp${k + 1}">--}%
+                <div class="dt-orden" role="tab" id="headingComp${k + 1}">
+                    %{--<h4 class="panel-title" data-toggle="collapse" data-parent="#accordion" href="#componente${k + 1}"--}%
                     <h4 class="panel-title" data-toggle="collapse" data-parent="#accordion" href="#componente${k + 1}"
-                        aria-expanded="false" aria-controls="componente${k + 1}">
+                        aria-expanded="false" aria-controls="componente${k + 1}" style="font-weight: normal">
 %{--                        <a href="#">--}%
                             <table class="" style="width: 100%">
                                 <tbody>

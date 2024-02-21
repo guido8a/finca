@@ -18,6 +18,10 @@
         font-weight: bold;
         color: #405c8d;
     }
+    .dt-orden {
+        padding: 1px 3px;
+        background-image: linear-gradient( #dfdfdf, #f0f0ff, #dfdfdf);
+    }
     </style>
 
 </head>
