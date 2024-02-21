@@ -25,12 +25,9 @@
         <g:each in="${detalle}" var="dt" status="k">
             <g:set var="total" value="${0}" />
             <div class="panel">
-                %{--<div class="panel-heading" role="tab" id="headingComp${k + 1}">--}%
                 <div class="dt-orden" role="tab" id="headingComp${k + 1}">
-                    %{--<h4 class="panel-title" data-toggle="collapse" data-parent="#accordion" href="#componente${k + 1}"--}%
                     <h4 class="panel-title" data-toggle="collapse" data-parent="#accordion" href="#componente${k + 1}"
                         aria-expanded="false" aria-controls="componente${k + 1}" style="font-weight: normal">
-%{--                        <a href="#">--}%
                             <table class="" style="width: 100%">
                                 <tbody>
                                 <tr data-id="${dt.dtor__id}" class="${dt?.dtoretdo == '1' ? 'registrado' : ''}">
@@ -71,7 +68,6 @@
                                 </tr>
                                 </tbody>
                             </table>
-%{--                        </a>--}%
                     </h4>
                 </div>
 
@@ -201,29 +197,11 @@
         //location.reload()//ajax
     });
 
-    // cargarTotales();
-
-    %{--function cargarTotales(){--}%
-    %{--var total = '${total}';--}%
-    %{--$.ajax({--}%
-    %{--type: 'POST',--}%
-    %{--url: '${createLink(controller: 'programa', action: 'tablaTotales_ajax')}',--}%
-    %{--data:{--}%
-    %{--total:total--}%
-    %{--},--}%
-    %{--success:function (msg) {--}%
-    %{--$("#divTotales").html(msg)--}%
-    %{--} --}%
-    %{--});--}%
-    %{--}--}%
-
     $(".btnEditarOrden").click(function () {
         var id = $(this).data("id");
         var prod = $(this).data("prod");
         var cntd = $(this).data("cntd");
         var fam = $(this).data("fam");
-
-
 
         $("#idOrden").val(id);
         $("#familia").val(fam);
@@ -304,6 +282,4 @@
             return false;
         }
     }
-
-
 </script>

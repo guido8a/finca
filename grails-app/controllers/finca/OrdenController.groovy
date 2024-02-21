@@ -144,19 +144,51 @@ class OrdenController {
     }
 
     def saveDistribuir_ajax(){
-        def dtor = DetalleOrden.get(params.id)
+
+        println("params " + params)
+
+        def dtor = DetalleOrden.get(params.dtor)
         def finca = Finca.get(params.finca)
         def detallesFincas = DetalleFinca.findAllByDetalleOrden(dtor)
-        def estimado = detallesFincas.size() > 0 ? detallesFincas*.cantidad.sum() : 0
-        def diferencia= dtor.cantidad - estimado?.toInteger()
+        def estimado
+        def diferencia
+        def detalle
 
-        if(params.cantidad.toInteger() > diferencia){
-            render "no_La cantidad ingresada es mayor a la diferencia disponible"
-            return true
-        }else{
-            def detalle = new DetalleFinca()
-            detalle.detalleOrden = dtor
-            detalle.finca = finca
+            if(params.id){
+                def detallesOtros = DetalleFinca.findAllByDetalleOrdenAndIdNotEqual(dtor, params.id)
+                estimado = detallesOtros.size() > 0 ? detallesOtros*.cantidad.sum() : 0
+                estimado = estimado + params.cantidad.toInteger()
+                diferencia= dtor.cantidad - estimado?.toInteger()
+
+                if(diferencia < 0){
+                    render "no_La cantidad ingresada es mayor a la diferencia disponible"
+                    return true
+                }else{
+                    detalle = DetalleFinca.get(params.id)
+                }
+            }else{
+
+                estimado = detallesFincas.size() > 0 ? detallesFincas*.cantidad.sum() : 0
+                diferencia= dtor.cantidad - estimado?.toInteger()
+
+                if(params.cantidad.toInteger() > diferencia){
+                    render "no_La cantidad ingresada es mayor a la diferencia disponible"
+                    return true
+                }else{
+
+                    if(finca in detallesFincas.finca){
+                        render "no_La finca ya contiene una cantidad ingresada"
+                        return true
+                    }else{
+                        detalle = new DetalleFinca()
+                        detalle.detalleOrden = dtor
+                        detalle.finca = finca
+                    }
+
+                }
+
+            }
+
             detalle.cantidad = params.cantidad.toInteger()
             detalle.diferencia = (detalle?.estimado ?: 0) - params.cantidad.toInteger()
 
@@ -166,7 +198,6 @@ class OrdenController {
             }else{
                 render "ok_Guardado correctamente"
             }
-        }
     }
 
 //    def saveDistribuir_ajax(){

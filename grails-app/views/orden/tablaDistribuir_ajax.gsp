@@ -4,7 +4,7 @@
         <g:if test="${detalles.size() > 0}">
             <g:each in="${detalles}" var="detalle">
                 <tr>
-                    <td style="width: 14%">${detalle?.finca?.nombre}</td>
+                    <td style="width: 12%">${detalle?.finca?.nombre}</td>
                     <td style="width: 14%">${detalle?.detalleOrden?.producto?.nombre}</td>
                     <td style="width: 8%">${detalle?.detalleOrden?.producto?.size}</td>
                     <td style="width: 8%">${detalle?.detalleOrden?.producto?.unindadesCaja}</td>
@@ -14,8 +14,11 @@
                     <td style="width: 8%">${detalle?.cantidad}</td>
                     <td style="width: 8%">${detalle?.estimado}</td>
                     <td style="width: 8%">${detalle?.diferencia}</td>
-                    <td style="width: 8%; text-align: center">
-                        <a href="#" data-id="${detalle?.id}" class="btn btn-danger btn-xs btnBorrarDistribuir btn-ajax" title="Eliminar">
+                    <td style="width: 10%; text-align: center">
+                        <a href="#" data-id="${detalle?.id}" data-cantidad="${detalle?.cantidad}" data-finca="${detalle?.finca?.id}" class="btn btn-success btn-xs btnEditarDistribuir" title="Editar">
+                            <i class="fa fa-edit"></i>
+                        </a>
+                        <a href="#" data-id="${detalle?.id}" class="btn btn-danger btn-xs btnBorrarDistribuir" title="Eliminar">
                             <i class="fa fa-trash"></i>
                         </a>
                     </td>
@@ -65,8 +68,10 @@
                                 if (parts[0] === 'ok') {
                                     log(parts[1], "success");
                                     cargarTablaDistribucion();
-                                    cargarFincas();
+                                    // cargarFincas();
                                     cargarEstimado();
+                                    cargarTablaOrden();
+                                    cancelarEdicion();
                                 } else {
                                     bootbox.alert('<i class="fa fa-exclamation-triangle text-danger fa-3x"></i> ' + '<strong style="font-size: 14px">' + parts[1] + '</strong>');
                                 }
@@ -81,6 +86,18 @@
     $(".btnBorrarDistribuir").click(function () {
         var id = $(this).data("id");
         deleteRowD(id)
+    });
+
+    $(".btnEditarDistribuir").click(function () {
+        var id = $(this).data("id");
+        var cantidad = $(this).data("cantidad");
+        var finca = $(this).data("finca");
+        $("#dsfn").val(id);
+        $("#cantidadDistribuir").val(cantidad);
+        $("#finca").val(finca);
+        $("#btnAgregar").addClass('hidden');
+        $("#btnGuardarDistribucion").removeClass('hidden');
+        $("#btnCancelarDistribucion").removeClass('hidden');
     });
 
 </script>
