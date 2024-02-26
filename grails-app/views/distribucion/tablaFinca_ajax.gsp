@@ -9,7 +9,7 @@
             <th style="width: 6%">Weight</th>
             <th style="width: 6%">Packing</th>
             <th style="width: 6%">Brand</th>
-            <th style="width: 8%">Order</th>
+            <th style="width: 8%">Distribuido</th>
             <th style="width: 8%">Estimated</th>
             <th style="width: 6%">Difference</th>
             <th style="width: 6%">Total</th>
@@ -34,7 +34,7 @@
                     <td style="width: 6%">${dt?.prodpeso}</td>
                     <td style="width: 6%">${dt?.prodpack}</td>
                     <td style="width: 6%">${dt?.prodbrnd}</td>
-                    <td style="width: 8%; text-align: left">${dt?.dtorcntd}</td>
+                    <td style="width: 8%; text-align: left">${dt?.dtordist}</td>
                     <td style="width: 8%; text-align: left">${dt?.dtorestd}</td>
                     <td style="width: 6%">${dt?.dtordiff}</td>
                     <td style="width: 6%">${dt?.dtortotl}</td>

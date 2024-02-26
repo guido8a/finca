@@ -82,7 +82,7 @@
                             <th style="width: 8%">Weight</th>
                             <th style="width: 8%">Packing</th>
                             <th style="width: 8%">Brand</th>
-                            <th style="width: 8%">Cantidad</th>
+                            <th style="width: 8%">Distribuido</th>
                             <th style="width: 8%">Estimado</th>
                             <th style="width: 8%">Diferencia</th>
                         </tr>
