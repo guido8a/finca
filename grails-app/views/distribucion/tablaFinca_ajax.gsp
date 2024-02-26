@@ -70,6 +70,8 @@
 
 <script type="text/javascript">
 
+    var dcd;
+
     $(".btnConfirmarOrden").click(function () {
         var title = "Confirmación";
         var id = $(this).data("dsfn");
@@ -78,24 +80,29 @@
             url: "${createLink(controller: 'distribucion', action:'confirmar_ajax')}",
             data: {id: id},
             success: function (msg) {
-                var b = bootbox.dialog({
+                dcd = bootbox.dialog({
                     title: title,
                     closeButton: false,
                     class: "modal-lg",
                     message: msg,
-                    buttons: {
-                        aceptar: {
-                            label: "Aceptar",
-                            className: "btn-primary",
-                            callback: function () {
-                            }
-                        }
-                    }
+                    // buttons: {
+                    //     aceptar: {
+                    //         label: "Aceptar",
+                    //         className: "btn-primary",
+                    //         callback: function () {
+                    //         }
+                    //     }
+                    // }
                 }); //dialog
             } //successJava
         });
         //location.reload()//ajax
     });
+
+    function cerrarDialogoConfirmarDistribucion(){
+        dcd.modal("hide");
+    }
+
 
     // cargarTotales();
 

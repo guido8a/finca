@@ -160,21 +160,21 @@ class OrdenController {
                 estimado = estimado + params.cantidad.toInteger()
                 diferencia= dtor.cantidad - estimado?.toInteger()
 
-                if(diferencia < 0){
-                    render "no_La cantidad ingresada es mayor a la diferencia disponible"
-                    return true
-                }else{
+//                if(diferencia < 0){
+//                    render "no_La cantidad ingresada es mayor a la diferencia disponible"
+//                    return true
+//                }else{
                     detalle = DetalleFinca.get(params.id)
-                }
+//                }
             }else{
 
                 estimado = detallesFincas.size() > 0 ? detallesFincas*.cantidad.sum() : 0
                 diferencia= dtor.cantidad - estimado?.toInteger()
 
-                if(params.cantidad.toInteger() > diferencia){
-                    render "no_La cantidad ingresada es mayor a la diferencia disponible"
-                    return true
-                }else{
+//                if(params.cantidad.toInteger() > diferencia){
+//                    render "no_La cantidad ingresada es mayor a la diferencia disponible"
+//                    return true
+//                }else{
 
                     if(finca in detallesFincas.finca){
                         render "no_La finca ya contiene una cantidad ingresada"
@@ -185,7 +185,7 @@ class OrdenController {
                         detalle.finca = finca
                     }
 
-                }
+//                }
 
             }
 

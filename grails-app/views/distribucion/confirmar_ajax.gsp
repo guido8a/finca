@@ -142,6 +142,7 @@
                             log(parts[1], "success");
                             cargarTablaOrden();
                             cargarEstimado();
+                            cerrarDialogoConfirmarDistribucion();
                         }else{
                             bootbox.alert('<i class="fa fa-exclamation-triangle text-danger fa-3x"></i> ' + '<strong style="font-size: 14px">' + parts[1] + '</strong>');
                             return false;
