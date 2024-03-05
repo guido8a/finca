@@ -10,6 +10,7 @@ import static java.awt.RenderingHints.VALUE_INTERPOLATION_BICUBIC
 class PersonaController {
 
     def tramitesService
+    def mailService
 
     static allowedMethods = [save: "POST", delete: "POST", save_ajax: "POST", delete_ajax: "POST"]
 
@@ -1413,5 +1414,29 @@ class PersonaController {
         }
 
         return[personas: personas]
+    }
+
+    def enviarCorreo(){
+
+        def errores = ''
+
+        try{
+            mailService.sendMail {
+                to "fegrijalva2501@hotmail.com"
+                subject "Correo de verificación"
+                body "Datos de ingreso: " +
+                        "\n Usuario " +
+                        "\n Contraseña"
+            }
+        }catch (e){
+            println("Error al enviar el mail: " + e)
+            errores += e
+        }
+
+        if(errores == ''){
+            render "ok_Enviado correctamente"
+        }else{
+            render "no_Error al enviar"
+        }
     }
 }

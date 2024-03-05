@@ -47,6 +47,8 @@ dependencies {
     compile "org.hibernate:hibernate-core:5.1.16.Final"
     compile "org.grails.plugins:gsp"
     compile fileTree(dir: 'lib', include: '*.jar')  //con esto se usan todos los jar de /lib
+    compile "org.grails.plugins:mail:2.0.1"
+
 
     compile group: 'com.itextpdf', name: 'itextpdf', version: '5.5.13'
 //    compile "org.grails.plugins:qr-code:0.1.4"

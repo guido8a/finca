@@ -34,6 +34,10 @@
         <a href="#" class="btn btn-success btnBuscar">
             <i class="fa fa-search"></i> Buscar
         </a>
+
+%{--        <a href="#" class="btn btn-warning btnEnviar">--}%
+%{--            <i class="fa fa-envelope"></i> Enviar--}%
+%{--        </a>--}%
     </div>
 </div>
 
@@ -189,6 +193,23 @@
         createEditRowPersona();
         return false;
     });
+
+    $(".btnEnviar").click(function () {
+        $.ajax({
+            type: "POST",
+            url: '${createLink(controller: 'persona', action:'enviarCorreo')}',
+            data: {
+            },
+            success: function (msg) {
+                var parts = msg.split("_");
+                if (parts[0] === 'ok') {
+                    log(parts[1], "success");
+                } else {
+                    bootbox.alert('<i class="fa fa-exclamation-triangle text-danger fa-3x"></i> ' + '<strong style="font-size: 14px">' + parts[1] + '</strong>');
+                }
+            }
+        });
+    })
 
 </script>
 
