@@ -93,7 +93,7 @@ class OrdenController {
             flash.message("Error")
         } else if(ordn.size() == 1){
             sql = "select * from orden(1, ${ordn[0]?.semana.id})"
-            println "sql. $sql"
+//            println "sql. $sql"
             detalle = cn.rows(sql.toString())
         }
 
