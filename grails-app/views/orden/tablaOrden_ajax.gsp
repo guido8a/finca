@@ -53,7 +53,9 @@
                     <g:each in="${finca.Finca.list().sort{it.nombre}}" var="fincaTD" status="i">
                         <g:set var="distribuido" value="${finca.DetalleFinca.findByFincaAndDetalleOrden(fincaTD, DetalleOrden.get(dt?.dtor__id))}"/>
                         <td id="${fincaTD?.id}">
-                            <g:textField name="dist_${distribuido?.id}" id="${fincaTD?.id}_${dt?.dtor__id}_${distribuido?.id}" value="${distribuido ? distribuido?.cantidad : 0}" style="width: 45px" />
+                            <g:textField name="dist_${distribuido?.id}" id="${fincaTD?.id}_${dt?.dtor__id}_${distribuido?.id}"
+                                         data-id="${fincaTD?.id}_${dt?.dtor__id}_${distribuido?.id}"  class="fincas"
+                                         value="${distribuido ? distribuido?.cantidad : 0}" style="width: 45px" />
                         </td>
                     </g:each>
                     <td style="width: 5%" id="tdUltimo" data-v="${dt.dtor__id}">
@@ -79,9 +81,18 @@
         // var hermanos = $("#tdUltimo").siblings("td")
         var padre = $(this).parent("td")
         var hermanos = $(this).parent("td").siblings("td")
+        console.log("td --> ", padre.data("id"))
         console.log("--> " + padre.data("v"))
         console.log("--> " + hermanos)
     });
+
+    $(".fincas").click(function () {
+        var data = $(this).data("id")
+        console.log("clic: ", data)
+        console.log("clic: ", data)
+    });
+
+
 
     $(".btnEditarOrden").click(function () {
         var id = $(this).data("id");
