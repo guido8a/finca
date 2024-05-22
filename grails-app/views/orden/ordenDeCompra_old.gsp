@@ -39,6 +39,10 @@
     </div>
 
     <div class="col-md-2" style="margin-top: 14px">
+        %{--<g:select name="semana" from="${finca.Semana.list([sort: 'numero'])}"--}%
+        %{--class="form-control input-sm required text-info" optionValue="${{'Semana ' + it.numero + ' : ' + it.fechaInicio.format('dd-MM-yyyyy') +--}%
+        %{--" - " +  it.fechaFin.format('dd-MM-yyyyy')}}" optionKey="id"--}%
+        %{--/>--}%
         <g:select name="semana" from="${finca.Semana.list([sort: 'numero'])}"
                   class="form-control input-sm required text-info" optionValue="${{ 'Semana ' + it.numero }}"
                   optionKey="id"/>
@@ -110,6 +114,7 @@
 
 </div>
 
+%{--<elm:pagination total="${tipoElementoInstanceCount}" params="${params}"/>--}%
 
 <script type="text/javascript">
     var id = null;
@@ -151,6 +156,7 @@
     function cargarTablaOrden() {
         var smna = $("#semana option:selected").val();
         var ordn = $("#orden").val();
+//        var ck_prdo = $("#prdoChck").is(':checked');
         $.ajax({
             type: "POST",
             url: "${createLink(controller: 'orden', action:'tablaOrden_ajax')}",
@@ -232,7 +238,7 @@
         bootbox.dialog({
             title: "Alerta",
             message: '<div style="text-align: center">' + '<i class="fa fa-trash fa-2x text-danger"></i>' +
-                ' ¿Está seguro que desea borrar ' + '<strong style="font-size: 14px">' + producto + '?</strong></div>',
+            ' ¿Está seguro que desea borrar ' + '<strong style="font-size: 14px">' + producto + '?</strong></div>',
             buttons: {
                 cancelar: {
                     label: "Cancelar",
@@ -285,10 +291,10 @@
          39         -> flecha der
          */
         return ((ev.keyCode >= 48 && ev.keyCode <= 57) ||
-            (ev.keyCode >= 96 && ev.keyCode <= 105) ||
-            ev.keyCode === 190 || ev.keyCode === 110 ||
-            ev.keyCode === 8 || ev.keyCode === 46 || ev.keyCode === 9 ||
-            ev.keyCode === 37 || ev.keyCode === 39);
+        (ev.keyCode >= 96 && ev.keyCode <= 105) ||
+        ev.keyCode === 190 || ev.keyCode === 110 ||
+        ev.keyCode === 8 || ev.keyCode === 46 || ev.keyCode === 9 ||
+        ev.keyCode === 37 || ev.keyCode === 39);
     }
 
     $("#hora").keydown(function (ev) {
