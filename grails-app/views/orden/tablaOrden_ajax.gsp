@@ -115,6 +115,7 @@
                 var parts = msg.split("_");
                 if(parts[0] === 'ok'){
                     log(parts[1], "success");
+                    location.reload();
                 }else{
                     bootbox.alert('<i class="fa fa-exclamation-triangle text-danger fa-3x"></i> ' +
                         '<strong style="font-size: 14px">' + parts[1] + '</strong>');
