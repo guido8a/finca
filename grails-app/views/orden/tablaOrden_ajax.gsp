@@ -52,9 +52,9 @@
                     <td style="width: 3%; background-color: white"></td>
                     <g:each in="${finca.Finca.list().sort{it.nombre}}" var="fincaTD" status="i">
                         <g:set var="distribuido" value="${finca.DetalleFinca.findByFincaAndDetalleOrden(fincaTD, DetalleOrden.get(dt?.dtor__id))}"/>
-                        <td id="${fincaTD?.id}">
-                            <g:textField name="dist_${distribuido?.id}" id="${fincaTD?.id}_${dt?.dtor__id}_${distribuido?.id}"
-                                         data-id="${fincaTD?.id}_${dt?.dtor__id}_${distribuido?.id}"  class="fincas"
+                        <td data-id="123">
+                            <g:textField name="dist_${dt?.dtor__id}" id="${fincaTD?.id}_${dt?.dtor__id}_${distribuido?.id}"
+                                         data-id="${fincaTD?.id}_${dt?.dtor__id}_${distribuido?.id}"  class="fincas_${dt?.dtor__id}"
                                          value="${distribuido ? distribuido?.cantidad : 0}" style="width: 45px" />
                         </td>
                     </g:each>
@@ -78,20 +78,51 @@
 
 
     $(".btnGuardarDistribucion").click(function () {
-        // var hermanos = $("#tdUltimo").siblings("td")
-        var padre = $(this).parent("td")
-        var hermanos = $(this).parent("td").siblings("td")
-        console.log("td --> ", padre.data("id"))
-        console.log("--> " + padre.data("v"))
-        console.log("--> " + hermanos)
+        var id = $(this).data("id")
+
+        // var hermanos = $(".fincas_" + id).data("id");
+
+        $('.fincas_' + id).each(function() {
+            var valor = this.value
+            var todo = this.id
+            var finca = todo.split("_")[0]
+            var detalleOrden = todo.split("_")[1]
+            var id = todo.split("_")[2]
+
+            guardarValoresDistribucion(id, finca, detalleOrden, valor)
+        });
+
     });
 
-    $(".fincas").click(function () {
-        var data = $(this).data("id")
-        console.log("clic: ", data)
-        console.log("clic: ", data)
-    });
+    // $(".fincas").click(function () {
+    //     var data = $(this).data("id")
+    //     console.log("clic: ", data)
+    // });
 
+    function guardarValoresDistribucion(id, finca, orden, valor){
+        var d = cargarLoader("Guardando...");
+        $.ajax({
+            type    : "POST",
+            url     : "${createLink(controller: 'orden', action: 'guardarDistribucion_ajax')}",
+            data    : {
+                id: id,
+                finca: finca,
+                orden: orden,
+                valor: valor
+            },
+            success : function (msg) {
+                d.modal('hide');
+                var parts = msg.split("_");
+                if(parts[0] === 'ok'){
+                    log(parts[1], "success");
+                }else{
+                    bootbox.alert('<i class="fa fa-exclamation-triangle text-danger fa-3x"></i> ' +
+                        '<strong style="font-size: 14px">' + parts[1] + '</strong>');
+                    return false;
+                }
+            }
+        });
+    }
 
 
     $(".btnEditarOrden").click(function () {

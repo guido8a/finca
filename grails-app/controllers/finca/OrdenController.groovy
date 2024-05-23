@@ -244,4 +244,29 @@ class OrdenController {
         }
     }
 
+    def guardarDistribucion_ajax(){
+        def finca = Finca.get(params.finca)
+        def detalleOrden = DetalleOrden.get(params.orden)
+        def detalleFinca
+
+        if(params.id != 'null'){
+            detalleFinca = DetalleFinca.get(params.id)
+
+        }else{
+            detalleFinca = new DetalleFinca()
+            detalleFinca.finca = finca
+            detalleFinca.detalleOrden = detalleOrden
+
+        }
+
+        detalleFinca.cantidad = params.valor.toInteger()
+
+        if(!detalleFinca.save(flush:true)){
+            println("Error al guardar el valor distribuido de finca " + detalleFinca.errors)
+            render "no_Error al guardar el valor distribuido de finca"
+        }else{
+            render "ok_Guardado correctamente"
+        }
+    }
+
 }
