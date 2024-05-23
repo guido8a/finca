@@ -78,7 +78,7 @@ class OrdenController {
             render "ok_Producto borrado exitosamente"
         }catch(e){
             println("error al borrar el orden " + dtor.errors)
-            render "no"
+            render "no_Error al borrar"
         }
     }
 
